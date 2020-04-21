@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PC Builder</string>
+    <string name="about">关于</string>
+    <string name="update">更新</string>
+    <string name="dark_mode">黑夜模式</string>
+    <string name="first_fragment_label">首页</string>
+    <string name="second_fragment_label">第二页</string>
+    <string name="next">下一页</string>
+    <string name="previous">上一页</string>
+    <string name="hello_first_fragment">你好！世界！</string>
+    <string name="hello_second_fragment">你好！安卓！</string>
+</resources>

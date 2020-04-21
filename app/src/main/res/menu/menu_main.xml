@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.p9j7.pcbuilder.MainActivity">
+    <item
+        android:id="@+id/about"
+        android:checkable="true"
+        android:orderInCategory="100"
+        android:title="@string/dark_mode"
+        app:showAsAction="never" />
+    <item android:title="@string/about" />
+    <item android:title="@string/update" />
+</menu>
