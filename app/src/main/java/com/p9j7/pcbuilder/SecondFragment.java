@@ -23,6 +23,7 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().findViewById(R.id.toolbar).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.fab).setVisibility(View.GONE);
 
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override

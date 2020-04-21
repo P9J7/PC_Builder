@@ -1,9 +1,12 @@
 package com.p9j7.pcbuilder;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -24,7 +27,8 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
+        getActivity().findViewById(R.id.fab).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
