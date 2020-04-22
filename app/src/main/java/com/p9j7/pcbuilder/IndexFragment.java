@@ -15,13 +15,14 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IndexFragment extends Fragment {
     private RecyclerView recyclerView;
     private SchemeAdapter schemeAdapter;
     private SchemeViewModel schemeViewModel;
-    private LiveData<List<Scheme>> schemeList;
+    private List<Scheme> schemeList;
 
     @Override
     public View onCreateView(
@@ -52,10 +53,12 @@ public class IndexFragment extends Fragment {
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
         recyclerView = getActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        schemeAdapter = new SchemeAdapter(schemeViewModel);
+        schemeAdapter = new SchemeAdapter(schemeViewModel, getContext());
+        schemeList = new ArrayList<>();
+        schemeAdapter.setSchemes(schemeList);
         //todo 接下来要怎么做？
-        Scheme scheme = new Scheme("AMD游戏平台", 36.2, "r7-3800x");
-        schemeViewModel.insertSchemes(scheme);
+//        Scheme scheme = new Scheme("AMD游戏平台", 36.2, "r7-3800x");
+//        schemeViewModel.insertSchemes(scheme);
         schemeViewModel.getAllScheme().observe(getViewLifecycleOwner(), new Observer<List<Scheme>>() {
             @Override
             public void onChanged(List<Scheme> schemes) {

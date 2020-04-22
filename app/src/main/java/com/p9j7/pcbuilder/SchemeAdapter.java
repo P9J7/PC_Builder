@@ -1,23 +1,34 @@
 package com.p9j7.pcbuilder;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
+
 
 public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewHolder> {
     private SchemeViewModel schemeViewModel;
     private List<Scheme> schemes;
+    private Context context;
 
-    SchemeAdapter(SchemeViewModel viewModel) {
+    SchemeAdapter(SchemeViewModel viewModel, Context context) {
         super(new DiffUtil.ItemCallback<Scheme>() {
             @Override
             public boolean areItemsTheSame(@NonNull Scheme oldItem, @NonNull Scheme newItem) {
@@ -32,6 +43,7 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
             }
         });
         this.schemeViewModel = viewModel;
+        this.context = context;
     }
 
     @NonNull
@@ -55,9 +67,22 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
         holder.schemeName.setText(scheme.getName());
         holder.schemePrice.setText("￥" + scheme.getPrice());
         holder.schemeDetail.setText(scheme.getDetail());
+        Glide.with(context).load("https://img10.360buyimg.com/n1/s450x450_jfs/t3082/185/5978515992/258515/dc6beac1/589a7190N62b6ee82.jpg")
+                .into(holder.imageView);
+        Glide.with(context).load("http://img13.360buyimg.com/n1/s450x450_jfs/t1/114117/14/1515/307612/5e994b5eE24c45abf/684be3b9b37b4f33.jpg")
+                .into(holder.imageView1);
+//        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cpu);
+//        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), bitmap);
+//        roundedBitmapDrawable.setCircular(true);
+//        holder.imageView.setImageDrawable(roundedBitmapDrawable);
+//        Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.dc);
+//        RoundedBitmapDrawable roundedBitmapDrawable1 = RoundedBitmapDrawableFactory.create(context.getResources(), bitmap1);
+//        roundedBitmapDrawable1.setCircular(true);
+//        holder.imageView1.setImageDrawable(roundedBitmapDrawable1);
         // todo 设置图片列表
-
     }
+
+
 
     public void setSchemes(List<Scheme> schemes) {
         this.schemes = schemes;
@@ -73,13 +98,18 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
         private TextView schemeName;
         private TextView schemePrice;
         private TextView schemeDetail;
-        private GridView gridPhoto;
+        private LinearLayout gridPhoto;
+        private ImageView imageView;
+        private ImageView imageView1;
+
         public SchemeViewHolder(@NonNull View itemView) {
             super(itemView);
             schemeName = itemView.findViewById(R.id.scheme_name);
             schemePrice = itemView.findViewById(R.id.scheme_price);
             schemeDetail = itemView.findViewById(R.id.scheme_dtl);
-            gridPhoto = itemView.findViewById(R.id.grid_photo);
+            gridPhoto = itemView.findViewById(R.id.linearLayout);
+            imageView = itemView.findViewById(R.id.imageView8);
+            imageView1 = itemView.findViewById(R.id.imageView7);
         }
     }
 }
