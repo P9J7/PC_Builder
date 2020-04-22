@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.p9j7.pcbuilder.FirstFragment"
+        android:name="com.p9j7.pcbuilder.IndexFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/index_item">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
