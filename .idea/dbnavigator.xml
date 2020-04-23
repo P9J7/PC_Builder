@@ -23,14 +23,21 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d">
+        <schema name="main" object-types="view, table" />
+      </connection>
+      <connection connection-id="892efb00-8755-4700-b1f8-5c42e4283d67">
+        <schema name="main" object-types="index, view, dataset trigger, constraint, column, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d">
       <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from pc_build_dtl]]></console>
     </connection>
-    <connection id="a0529297-2008-4ed8-9aa9-7476e200f1bc">
-      <console name="Connection 1" type="STANDARD" schema="" session="Main"><![CDATA[select * from Scheme;]]></console>
+    <connection id="892efb00-8755-4700-b1f8-5c42e4283d67">
+      <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -38,10 +45,14 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" />
-    <connection id="a0529297-2008-4ed8-9aa9-7476e200f1bc" />
+    <connection id="892efb00-8755-4700-b1f8-5c42e4283d67" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_build" active-filter-id="" />
+    <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_build" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.socket_proc" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.socket_mobo" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_parts" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="892efb00-8755-4700-b1f8-5c42e4283d67" dataset="main.Scheme" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -152,7 +163,7 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="a0529297-2008-4ed8-9aa9-7476e200f1bc" active="true">
+      <connection id="892efb00-8755-4700-b1f8-5c42e4283d67" active="true">
         <database>
           <name value="Connection 1" />
           <description value="" />
@@ -167,7 +178,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\Ynight\Desktop\scheme_database" schema="main" />
+            <file path="C:\Users\Ynight\Desktop\database\scheme_database" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
