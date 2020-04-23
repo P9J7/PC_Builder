@@ -10,4 +10,7 @@
     <string name="previous">上一页</string>
     <string name="hello_first_fragment">你好！世界！</string>
     <string name="hello_second_fragment">你好！安卓！</string>
+    <string name="fire">确认</string>
+    <string name="aboutFirst">一个用Java语言写的装机助手</string>
+    <string name="aboutSecond">作者 P9J7</string>
 </resources>

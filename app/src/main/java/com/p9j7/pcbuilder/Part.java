@@ -7,19 +7,30 @@ import androidx.room.PrimaryKey;
 public class Part {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    //当做商品id使用
     private String imgPath;
     private String title;
     private double price;
     private double score;
     private String detail;
+    private String category;
 
-    public Part(int id, String imgPath, String title, double price, double score, String detail) {
+    public Part(int id, String imgPath, String title, double price, double score, String detail, String category) {
         this.id = id;
         this.imgPath = imgPath;
         this.title = title;
         this.price = price;
         this.score = score;
         this.detail = detail;
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public int getId() {

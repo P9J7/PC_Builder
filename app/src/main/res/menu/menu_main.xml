@@ -3,11 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.p9j7.pcbuilder.MainActivity">
     <item
-        android:id="@+id/about"
+        android:id="@+id/darkmode"
         android:checkable="true"
         android:orderInCategory="100"
         android:title="@string/dark_mode"
         app:showAsAction="never" />
-    <item android:title="@string/about" />
-    <item android:title="@string/update" />
+    <item
+        android:id="@+id/about"
+        android:title="@string/about" />
+    <item
+        android:id="@+id/update"
+        android:title="@string/update" />
 </menu>

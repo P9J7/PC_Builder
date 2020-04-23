@@ -11,4 +11,9 @@
     <string name="about">About</string>
     <string name="update">Update</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="fire">confirm</string>
+    <string name="aboutFirst">A PC Builder Tool for Android,written in Java.</string>
+    <string name="aboutSecond">Author P9J7</string>
+    <string name="copyright" translatable="false">Copyright（C）2020 by P9J7</string>
+    <string name="email" translatable="false">p9j7stef@gmail.com</string>
 </resources>

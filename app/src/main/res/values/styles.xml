@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/titlecolor</item>
         <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
         <item name="colorAccent">@android:color/holo_blue_dark</item>
+        <item name="android:forceDarkAllowed">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

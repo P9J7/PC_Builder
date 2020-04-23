@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d">
-        <schema name="main" object-types="view, table" />
+        <schema name="main" object-types="index, view, dataset trigger, constraint, column, table" />
       </connection>
       <connection connection-id="892efb00-8755-4700-b1f8-5c42e4283d67">
         <schema name="main" object-types="index, view, dataset trigger, constraint, column, table" />
@@ -50,6 +50,7 @@
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_build" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.socket_proc" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_build_dtl" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.socket_mobo" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_parts" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="892efb00-8755-4700-b1f8-5c42e4283d67" dataset="main.Scheme" active-filter-id="EMPTY_FILTER" />

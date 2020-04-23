@@ -1,14 +1,13 @@
 package com.p9j7.pcbuilder;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,12 +19,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        SharedPreferences shp = this.getPreferences(Context.MODE_PRIVATE);
+        Boolean viewType = shp.getBoolean("IS_USING_DARK", false);
+        if (viewType) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        SharedPreferences shp = this.getPreferences(Context.MODE_PRIVATE);
+        Boolean viewType = shp.getBoolean("IS_USING_DARK", false);
+        menu.findItem(R.id.darkmode).setChecked(viewType);
         return true;
     }
 
@@ -38,7 +47,22 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.about) {
+            FireMissilesDialogFragment fireMissilesDialogFragment = new FireMissilesDialogFragment();
+            fireMissilesDialogFragment.show(getSupportFragmentManager(), null);
             return true;
+        } else if (id == R.id.darkmode) {
+            SharedPreferences shp = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = shp.edit();
+            if (item.isChecked()) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                editor.putBoolean("IS_USING_DARK", false);
+                item.setChecked(false);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor.putBoolean("IS_USING_DARK", true);
+                item.setChecked(true);
+            }
+            editor.apply();
         }
 
         return super.onOptionsItemSelected(item);
