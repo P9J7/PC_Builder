@@ -5,21 +5,14 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
-
 @Entity
 public class Scheme {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int schemeId;
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "price")
     private double price;
-    //todo 怎么设计数据库和room
-//    @ColumnInfo(name = "partList")
-
-    @Ignore
-    private List<Part> partList;
     @ColumnInfo(name = "detail")
     private String detail;
 
@@ -33,20 +26,12 @@ public class Scheme {
         this.detail = detail;
     }
 
-    @Ignore
-    public Scheme(String name, double price, List<Part> partList, String detail) {
-        this.name = name;
-        this.price = price;
-        this.partList = partList;
-        this.detail = detail;
+    public int getSchemeId() {
+        return schemeId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setSchemeId(int schemeId) {
+        this.schemeId = schemeId;
     }
 
     public String getName() {
@@ -63,14 +48,6 @@ public class Scheme {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public List<Part> getPartList() {
-        return partList;
-    }
-
-    public void setPartList(List<Part> partList) {
-        this.partList = partList;
     }
 
     public String getDetail() {

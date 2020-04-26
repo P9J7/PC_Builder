@@ -11,7 +11,7 @@ import java.util.List;
 
 @Dao
 public interface SchemeDao {
-    @Query("SELECT * FROM Scheme ORDER BY ID DESC")
+    @Query("SELECT * FROM Scheme ORDER BY schemeId DESC")
     LiveData<List<Scheme>> getALLScheme();
 
     @Insert

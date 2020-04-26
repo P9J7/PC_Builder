@@ -14,7 +14,7 @@ class SchemeRepo {
     private SchemeDao schemeDao;
 
     public SchemeRepo(Context context) {
-        SchemeDatabase schemeDatabase = SchemeDatabase.getDatabase(context.getApplicationContext());
+        PCBuilderDatabase schemeDatabase = PCBuilderDatabase.getDatabase(context.getApplicationContext());
         schemeDao = schemeDatabase.getSchemeDao();
         allScheme = schemeDao.getALLScheme();
     }

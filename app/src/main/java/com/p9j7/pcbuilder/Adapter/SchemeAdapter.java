@@ -43,7 +43,7 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
         super(new DiffUtil.ItemCallback<Scheme>() {
             @Override
             public boolean areItemsTheSame(@NonNull Scheme oldItem, @NonNull Scheme newItem) {
-                return oldItem.getId() == newItem.getId();
+                return oldItem.getSchemeId() == newItem.getSchemeId();
             }
 
             @Override

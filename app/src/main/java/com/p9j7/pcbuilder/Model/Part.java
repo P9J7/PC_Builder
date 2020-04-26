@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Part {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int partId;
+    private int schemeId;
     //当做商品id使用
     private String imgPath;
     private String title;
@@ -15,8 +16,9 @@ public class Part {
     private String detail;
     private String category;
 
-    public Part(int id, String imgPath, String title, double price, double score, String detail, String category) {
-        this.id = id;
+    public Part(int partId, int schemeId, String imgPath, String title, double price, double score, String detail, String category) {
+        this.partId = partId;
+        this.schemeId = schemeId;
         this.imgPath = imgPath;
         this.title = title;
         this.price = price;
@@ -33,12 +35,20 @@ public class Part {
         this.category = category;
     }
 
-    public int getId() {
-        return id;
+    public int getPartId() {
+        return partId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPartId(int partId) {
+        this.partId = partId;
+    }
+
+    public int getSchemeId() {
+        return schemeId;
+    }
+
+    public void setSchemeId(int schemeId) {
+        this.schemeId = schemeId;
     }
 
     public String getImgPath() {

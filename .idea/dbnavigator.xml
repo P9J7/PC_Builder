@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d">
-        <schema name="main" object-types="table, view" />
+        <schema name="main" object-types="table, view, index, column, constraint, dataset trigger" />
       </connection>
       <connection connection-id="892efb00-8755-4700-b1f8-5c42e4283d67">
         <schema name="main" object-types="table, view" />
@@ -34,7 +34,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">select * from pc_build_dtl</console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from pc_build_dtl]]></console>
     </connection>
     <connection id="892efb00-8755-4700-b1f8-5c42e4283d67">
       <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
