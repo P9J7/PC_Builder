@@ -1,11 +1,9 @@
-package com.p9j7.pcbuilder;
+package com.p9j7.pcbuilder.Model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
-import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 

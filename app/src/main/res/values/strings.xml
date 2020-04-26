@@ -16,4 +16,10 @@
     <string name="aboutSecond">Author P9J7</string>
     <string name="copyright" translatable="false">Copyright（C）2020 by P9J7</string>
     <string name="email" translatable="false">p9j7stef@gmail.com</string>
+    <string name="copy">Copy</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="share">Share</string>
+    <string name="copy_as_text">copy as text</string>
+    <string name="save_to_pic">save to jpg</string>
 </resources>

@@ -13,4 +13,10 @@
     <string name="fire">确认</string>
     <string name="aboutFirst">一个用Java语言写的装机助手</string>
     <string name="aboutSecond">作者 P9J7</string>
+    <string name="copy">复制</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="share">分享</string>
+    <string name="copy_as_text">复制为文本</string>
+    <string name="save_to_pic">保存到图片</string>
 </resources>

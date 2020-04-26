@@ -1,9 +1,7 @@
-package com.p9j7.pcbuilder;
+package com.p9j7.pcbuilder.Adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +10,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.p9j7.pcbuilder.R;
+import com.p9j7.pcbuilder.Model.Scheme;
+import com.p9j7.pcbuilder.Data.SchemeViewModel;
 
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewHolder> {
@@ -28,7 +29,17 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
     private List<Scheme> schemes;
     private Context context;
 
-    SchemeAdapter(SchemeViewModel viewModel, Context context) {
+    private OnItemClickListener mOnItemClickListener;
+
+
+    public interface OnItemClickListener {
+        void onItemClick();
+    }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public SchemeAdapter(SchemeViewModel viewModel, Context context) {
         super(new DiffUtil.ItemCallback<Scheme>() {
             @Override
             public boolean areItemsTheSame(@NonNull Scheme oldItem, @NonNull Scheme newItem) {
@@ -56,6 +67,10 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
             @Override
             public void onClick(View v) {
                 // 跳转到配置详情界面
+                schemeViewModel.select(schemes.get(holder.getAdapterPosition()));
+                mOnItemClickListener.onItemClick();
+                //todo ?????
+                Log.i(TAG, "onClick: ");
             }
         });
         return holder;

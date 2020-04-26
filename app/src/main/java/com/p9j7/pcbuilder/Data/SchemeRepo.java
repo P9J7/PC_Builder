@@ -1,9 +1,11 @@
-package com.p9j7.pcbuilder;
+package com.p9j7.pcbuilder.Data;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+
+import com.p9j7.pcbuilder.Model.Scheme;
 
 import java.util.List;
 

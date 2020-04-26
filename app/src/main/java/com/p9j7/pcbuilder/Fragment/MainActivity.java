@@ -1,4 +1,4 @@
-package com.p9j7.pcbuilder;
+package com.p9j7.pcbuilder.Fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.p9j7.pcbuilder.Util.FireMissilesDialogFragment;
+import com.p9j7.pcbuilder.R;
 
 public class MainActivity extends AppCompatActivity {
 

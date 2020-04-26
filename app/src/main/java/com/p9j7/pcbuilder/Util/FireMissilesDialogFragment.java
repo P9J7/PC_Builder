@@ -1,12 +1,13 @@
-package com.p9j7.pcbuilder;
+package com.p9j7.pcbuilder.Util;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.p9j7.pcbuilder.R;
 
 
 public class FireMissilesDialogFragment extends DialogFragment {

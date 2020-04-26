@@ -1,4 +1,4 @@
-package com.p9j7.pcbuilder;
+package com.p9j7.pcbuilder.Model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
