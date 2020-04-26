@@ -13,21 +13,24 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment"
+            app:enterAnim="@anim/in_from_right"
+            app:exitAnim="@anim/out_to_left"
+            app:popEnterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_left" />
         <action
             android:id="@+id/action_FirstFragment_to_displayFragment"
-            app:destination="@id/displayFragment" />
+            app:destination="@id/displayFragment"
+            app:enterAnim="@anim/in_from_right"
+            app:exitAnim="@anim/out_to_left"
+            app:popEnterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_left" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.p9j7.pcbuilder.Fragment.SecondFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_second"/>
     <fragment
         android:id="@+id/displayFragment"
         android:name="com.p9j7.pcbuilder.Fragment.DisplayFragment"

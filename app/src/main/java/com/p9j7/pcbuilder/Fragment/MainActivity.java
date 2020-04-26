@@ -2,17 +2,24 @@ package com.p9j7.pcbuilder.Fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.p9j7.pcbuilder.Util.FireMissilesDialogFragment;
 import com.p9j7.pcbuilder.R;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,5 +76,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle("PC Builder");
+    }
+
+    public Fragment getVisibleFragment(){
+        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for(Fragment fragment : fragments){
+            if(fragment != null && fragment.isVisible())
+                return fragment;
+        }
+        return null;
     }
 }
