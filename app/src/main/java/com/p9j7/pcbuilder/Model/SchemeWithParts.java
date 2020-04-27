@@ -8,7 +8,7 @@ import java.util.List;
 public class SchemeWithParts {
     @Embedded
     private Scheme scheme;
-    @Relation(parentColumn = "schemeId", entityColumn = "partId")
+    @Relation(parentColumn = "schemeId", entityColumn = "schemeForeId")
     private List<Part> parts;
 
     public SchemeWithParts(Scheme scheme, List<Part> parts) {

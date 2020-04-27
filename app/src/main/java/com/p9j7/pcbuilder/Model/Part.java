@@ -2,14 +2,13 @@ package com.p9j7.pcbuilder.Model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Part {
     @PrimaryKey(autoGenerate = true)
     private int partId;
-    private int schemeId;
+    private int schemeForeId;
     //当做商品id使用
     private String imgPath;
     private String title;
@@ -19,9 +18,9 @@ public class Part {
     private String detail;
     private String category;
 
-    public Part(int partId, int schemeId, String title, double price) {
+    public Part(int partId, int schemeForeId, String title, double price) {
         this.partId = partId;
-        this.schemeId = schemeId;
+        this.schemeForeId = schemeForeId;
         this.title = title;
         this.price = price;
     }
@@ -42,12 +41,12 @@ public class Part {
         this.partId = partId;
     }
 
-    public int getSchemeId() {
-        return schemeId;
+    public int getSchemeForeId() {
+        return schemeForeId;
     }
 
-    public void setSchemeId(int schemeId) {
-        this.schemeId = schemeId;
+    public void setSchemeForeId(int schemeForeId) {
+        this.schemeForeId = schemeForeId;
     }
 
     public String getImgPath() {

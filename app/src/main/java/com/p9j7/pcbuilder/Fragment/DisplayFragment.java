@@ -68,21 +68,14 @@ public class DisplayFragment extends Fragment{
         partList = new ArrayList<>();
         displayAdapter.setParts(partList);
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
-        schemeViewModel.getSelected().observe(getViewLifecycleOwner(), new Observer<Scheme>() {
-            @Override
-            public void onChanged(Scheme scheme) {
-                TextView schemeName = getActivity().findViewById(R.id.schemeName);
-                schemeName.setText(scheme.getName());
-                TextView schemePrice = getActivity().findViewById(R.id.schemePrice);
-                schemePrice.setText("￥" + scheme.getPrice());
-                //TODO 更新UI
-                schemeViewModel.getAllPartBySchemeId(scheme.getSchemeId()).observe(getViewLifecycleOwner(), new Observer<List<Part>>() {
-                    @Override
-                    public void onChanged(List<Part> parts) {
-                        displayAdapter.setParts(parts);
-                    }
-                });
-            }
+        schemeViewModel.getSelected().observe(getViewLifecycleOwner(), scheme -> {
+            TextView schemeName = getActivity().findViewById(R.id.schemeName);
+            schemeName.setText(scheme.getScheme().getName());
+            TextView schemePrice = getActivity().findViewById(R.id.schemePrice);
+            schemePrice.setText("￥" + scheme.getScheme().getPrice());
+            displayAdapter.setParts(scheme.getParts());
+            //TODO 更新UI
+//            schemeViewModel.getAllPartBySchemeId(scheme.getScheme().getSchemeId()).observe(getViewLifecycleOwner(), parts -> displayAdapter.setParts(parts));
         });
 //        schemeViewModel.getAllScheme().observe(getViewLifecycleOwner(), new Observer<List<Part>>() {
 //            @Override

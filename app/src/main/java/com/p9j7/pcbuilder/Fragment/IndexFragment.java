@@ -1,6 +1,7 @@
 package com.p9j7.pcbuilder.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,25 +9,26 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.p9j7.pcbuilder.Model.SchemeWithParts;
 import com.p9j7.pcbuilder.R;
-import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class IndexFragment extends Fragment {
     private RecyclerView recyclerView;
     private SchemeAdapter schemeAdapter;
     private SchemeViewModel schemeViewModel;
-    private List<Scheme> schemeList;
+    private List<SchemeWithParts> schemeWithPartsList;
 
     @Override
     public View onCreateView(
@@ -52,14 +54,14 @@ public class IndexFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
         recyclerView = getActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         schemeAdapter = new SchemeAdapter(schemeViewModel, getContext());
-        schemeList = new ArrayList<>();
-        schemeAdapter.setSchemes(schemeList);
+        schemeWithPartsList = new ArrayList<>();
+        schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
         // todo 并没有搞明白下面这么做为什么能把 Fragment对象传过去
         schemeAdapter.setOnItemClickListener(new SchemeAdapter.OnItemClickListener() {
             @Override
@@ -69,13 +71,9 @@ public class IndexFragment extends Fragment {
             }
         });
         //todo 接下来要怎么做？
-//        Scheme scheme = new Scheme("AMD游戏平台", 36.2, "r7-3800x");
-//        schemeViewModel.insertSchemes(scheme);
-        schemeViewModel.getAllScheme().observe(getViewLifecycleOwner(), new Observer<List<Scheme>>() {
-            @Override
-            public void onChanged(List<Scheme> schemes) {
-                schemeAdapter.setSchemes(schemes);
-            }
+        schemeViewModel.getSchemesAndParts().observe(getViewLifecycleOwner(), schemeWithParts -> {
+            schemeWithParts.forEach(item -> schemeWithPartsList.add(item));
+            schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
         });
         recyclerView.setAdapter(schemeAdapter);
     }

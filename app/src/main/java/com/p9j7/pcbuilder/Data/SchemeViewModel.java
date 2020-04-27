@@ -9,23 +9,24 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
+import com.p9j7.pcbuilder.Model.SchemeWithParts;
 
 import java.util.List;
 
 public class SchemeViewModel extends AndroidViewModel {
     private SchemeRepo schemeRepo;
-    private final MutableLiveData<Scheme> selected = new MutableLiveData<>();
+    private final MutableLiveData<SchemeWithParts> selected = new MutableLiveData<>();
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
         schemeRepo = new SchemeRepo(application);
     }
 
-    public void select(Scheme scheme) {
+    public void select(SchemeWithParts scheme) {
         selected.setValue(scheme);
     }
 
-    public LiveData<Scheme> getSelected() {
+    public LiveData<SchemeWithParts> getSelected() {
         return selected;
     }
 
@@ -35,6 +36,10 @@ public class SchemeViewModel extends AndroidViewModel {
 
     public LiveData<List<Part>> getAllPartBySchemeId(Integer schemeId) {
         return schemeRepo.getAllPartBySchemeId(schemeId);
+    }
+
+    public LiveData<List<SchemeWithParts>> getSchemesAndParts() {
+        return schemeRepo.getSchemesAndParts();
     }
 
 

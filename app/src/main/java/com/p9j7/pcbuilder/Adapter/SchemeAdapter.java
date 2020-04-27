@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,19 +13,21 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.p9j7.pcbuilder.Model.Part;
+import com.p9j7.pcbuilder.Model.SchemeWithParts;
 import com.p9j7.pcbuilder.R;
-import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
+import com.p9j7.pcbuilder.Util.LoadImage;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewHolder> {
+public class SchemeAdapter extends ListAdapter<SchemeWithParts, SchemeAdapter.SchemeViewHolder> {
     private SchemeViewModel schemeViewModel;
-    private List<Scheme> schemes;
+    private List<SchemeWithParts> schemeWithPartsList;
     private Context context;
 
     private OnItemClickListener mOnItemClickListener;
@@ -40,17 +41,17 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
     }
 
     public SchemeAdapter(SchemeViewModel viewModel, Context context) {
-        super(new DiffUtil.ItemCallback<Scheme>() {
+        super(new DiffUtil.ItemCallback<SchemeWithParts>() {
             @Override
-            public boolean areItemsTheSame(@NonNull Scheme oldItem, @NonNull Scheme newItem) {
-                return oldItem.getSchemeId() == newItem.getSchemeId();
+            public boolean areItemsTheSame(@NonNull SchemeWithParts oldItem, @NonNull SchemeWithParts newItem) {
+                return oldItem.getScheme().getSchemeId() == newItem.getScheme().getSchemeId();
             }
 
             @Override
-            public boolean areContentsTheSame(@NonNull Scheme oldItem, @NonNull Scheme newItem) {
-                return (oldItem.getDetail().equals(newItem.getDetail()) &&
-                        oldItem.getPrice() == newItem.getPrice() &&
-                        oldItem.getName().equals(newItem.getName()));
+            public boolean areContentsTheSame(@NonNull SchemeWithParts oldItem, @NonNull SchemeWithParts newItem) {
+                return (oldItem.getScheme().getDetail().equals(newItem.getScheme().getDetail()) &&
+                        oldItem.getScheme().getPrice() == newItem.getScheme().getPrice() &&
+                        oldItem.getScheme().getName().equals(newItem.getScheme().getName()));
             }
         });
         this.schemeViewModel = viewModel;
@@ -67,7 +68,7 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
             @Override
             public void onClick(View v) {
                 // 跳转到配置详情界面
-                schemeViewModel.select(schemes.get(holder.getAdapterPosition()));
+                schemeViewModel.select(schemeWithPartsList.get(holder.getAdapterPosition()));
                 mOnItemClickListener.onItemClick();
                 //todo ?????
                 Log.i(TAG, "onClick: ");
@@ -78,14 +79,20 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
 
     @Override
     public void onBindViewHolder(@NonNull SchemeViewHolder holder, int position) {
-        final Scheme scheme = schemes.get(position);
-        holder.schemeName.setText(scheme.getName());
-        holder.schemePrice.setText("￥" + scheme.getPrice());
-        holder.schemeDetail.setText(scheme.getDetail());
-        Glide.with(context).load("https://img10.360buyimg.com/n1/s450x450_jfs/t3082/185/5978515992/258515/dc6beac1/589a7190N62b6ee82.jpg")
-                .into(holder.imageView);
-        Glide.with(context).load("http://img13.360buyimg.com/n1/s450x450_jfs/t1/114117/14/1515/307612/5e994b5eE24c45abf/684be3b9b37b4f33.jpg")
-                .into(holder.imageView1);
+        final SchemeWithParts scheme = schemeWithPartsList.get(position);
+        holder.schemeName.setText(scheme.getScheme().getName());
+        holder.schemePrice.setText("￥" + scheme.getScheme().getPrice());
+        holder.schemeDetail.setText(scheme.getScheme().getDetail());
+        List<Part> partList = scheme.getParts();
+        if (partList != null) {
+            partList.forEach(item -> {
+                if (item.getCategory().equals("cpu")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.cpuPhoto);
+                } else if (item.getCategory().equals("dcard")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.dcardPhoto);
+                }
+            });
+        }
 //        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.cpu);
 //        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), bitmap);
 //        roundedBitmapDrawable.setCircular(true);
@@ -99,32 +106,30 @@ public class SchemeAdapter extends ListAdapter<Scheme, SchemeAdapter.SchemeViewH
 
 
 
-    public void setSchemes(List<Scheme> schemes) {
-        this.schemes = schemes;
+    public void setSchemeWithPartsList(List<SchemeWithParts> schemeWithPartsList) {
+        this.schemeWithPartsList = schemeWithPartsList;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return schemes.size();
+        return schemeWithPartsList.size();
     }
 
     public class SchemeViewHolder extends RecyclerView.ViewHolder {
         private TextView schemeName;
         private TextView schemePrice;
         private TextView schemeDetail;
-        private LinearLayout gridPhoto;
-        private ImageView imageView;
-        private ImageView imageView1;
+        private ImageView cpuPhoto;
+        private ImageView dcardPhoto;
 
         public SchemeViewHolder(@NonNull View itemView) {
             super(itemView);
             schemeName = itemView.findViewById(R.id.scheme_name);
             schemePrice = itemView.findViewById(R.id.scheme_price);
             schemeDetail = itemView.findViewById(R.id.scheme_dtl);
-            gridPhoto = itemView.findViewById(R.id.linearLayout);
-            imageView = itemView.findViewById(R.id.imageView8);
-            imageView1 = itemView.findViewById(R.id.imageView7);
+            cpuPhoto = itemView.findViewById(R.id.imageView8);
+            dcardPhoto = itemView.findViewById(R.id.imageView7);
         }
     }
 }
