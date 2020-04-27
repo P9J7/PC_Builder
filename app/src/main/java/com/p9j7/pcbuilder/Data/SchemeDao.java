@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
 
 import java.util.List;
@@ -12,8 +13,11 @@ import java.util.List;
 @Dao
 public interface SchemeDao {
     @Query("SELECT * FROM Scheme ORDER BY schemeId DESC")
-    LiveData<List<Scheme>> getALLScheme();
+    LiveData<List<Scheme>> getAllScheme();
 
     @Insert
     void insertSchemes(Scheme... schemes);
+
+    @Query("SELECT * FROM Part WHERE schemeId = :schemeId")
+    LiveData<List<Part>> getAllPartBySchemeId(Integer schemeId);
 }

@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +20,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.p9j7.pcbuilder.Adapter.DisplayAdapter;
+import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
@@ -36,8 +35,8 @@ import java.util.List;
 public class DisplayFragment extends Fragment{
     private RecyclerView recyclerView;
     private SchemeViewModel schemeViewModel;
-    private SchemeAdapter schemeAdapter;
-    private List<Scheme> schemeList;
+    private DisplayAdapter displayAdapter;
+    private List<Part> partList;
 
 
     public static DisplayFragment newInstance() {
@@ -65,26 +64,33 @@ public class DisplayFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         recyclerView = getActivity().findViewById(R.id.recyclerDisplay);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        schemeAdapter = new SchemeAdapter(schemeViewModel, getContext());
-        schemeList = new ArrayList<>();
-        schemeAdapter.setSchemes(schemeList);
+        displayAdapter = new DisplayAdapter(getContext());
+        partList = new ArrayList<>();
+        displayAdapter.setParts(partList);
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
         schemeViewModel.getSelected().observe(getViewLifecycleOwner(), new Observer<Scheme>() {
             @Override
             public void onChanged(Scheme scheme) {
+                TextView schemeName = getActivity().findViewById(R.id.schemeName);
+                schemeName.setText(scheme.getName());
+                TextView schemePrice = getActivity().findViewById(R.id.schemePrice);
+                schemePrice.setText("￥" + scheme.getPrice());
                 //TODO 更新UI
-//                List<Part> partList = scheme.getPartList();
-
-
+                schemeViewModel.getAllPartBySchemeId(scheme.getSchemeId()).observe(getViewLifecycleOwner(), new Observer<List<Part>>() {
+                    @Override
+                    public void onChanged(List<Part> parts) {
+                        displayAdapter.setParts(parts);
+                    }
+                });
             }
         });
-        schemeViewModel.getAllScheme().observe(getViewLifecycleOwner(), new Observer<List<Scheme>>() {
-            @Override
-            public void onChanged(List<Scheme> schemes) {
-                schemeAdapter.setSchemes(schemes);
-            }
-        });
-        recyclerView.setAdapter(schemeAdapter);
+//        schemeViewModel.getAllScheme().observe(getViewLifecycleOwner(), new Observer<List<Part>>() {
+//            @Override
+//            public void onChanged(List<Part> parts) {
+//                displayAdapter.setParts(parts);
+//            }
+//        });
+        recyclerView.setAdapter(displayAdapter);
     }
 
     @Override

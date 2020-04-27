@@ -24,11 +24,8 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d">
-        <schema name="main" object-types="table, view, index, column, constraint, dataset trigger" />
-      </connection>
-      <connection connection-id="892efb00-8755-4700-b1f8-5c42e4283d67">
-        <schema name="main" object-types="table, view" />
+      <connection connection-id="c034adb8-dbf5-4f14-b003-fac38256d584">
+        <schema name="main" object-types="index, dataset trigger, view, table, column, constraint" />
       </connection>
     </loaded-nodes>
   </component>
@@ -36,16 +33,19 @@
     <connection id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d">
       <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from pc_build_dtl]]></console>
     </connection>
-    <connection id="892efb00-8755-4700-b1f8-5c42e4283d67">
+    <connection id="c034adb8-dbf5-4f14-b003-fac38256d584">
       <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="c034adb8-dbf5-4f14-b003-fac38256d584" object-ref="schemas/main/tables/Part" />
+      <object connection-id="c034adb8-dbf5-4f14-b003-fac38256d584" object-ref="schemas/main/tables/Scheme" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" />
-    <connection id="892efb00-8755-4700-b1f8-5c42e4283d67" />
+    <connection id="c034adb8-dbf5-4f14-b003-fac38256d584" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_build" active-filter-id="EMPTY_FILTER" />
@@ -53,7 +53,11 @@
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_build_dtl" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.socket_mobo" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="93a7e0d6-17bc-4a1a-b21e-3a6dc397105d" dataset="main.pc_parts" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="892efb00-8755-4700-b1f8-5c42e4283d67" dataset="main.Scheme" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c034adb8-dbf5-4f14-b003-fac38256d584" dataset="main.Scheme" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c034adb8-dbf5-4f14-b003-fac38256d584" dataset="main.sqlite_sequence" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c034adb8-dbf5-4f14-b003-fac38256d584" dataset="main.room_master_table" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c034adb8-dbf5-4f14-b003-fac38256d584" dataset="main.android_metadata" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c034adb8-dbf5-4f14-b003-fac38256d584" dataset="main.Part" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -164,7 +168,7 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="892efb00-8755-4700-b1f8-5c42e4283d67" active="true">
+      <connection id="c034adb8-dbf5-4f14-b003-fac38256d584" active="true">
         <database>
           <name value="Connection 1" />
           <description value="" />
@@ -179,7 +183,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\Ynight\Desktop\database\scheme_database" schema="main" />
+            <file path="C:\Users\Ynight\Desktop\1\PC_Builder_database" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
@@ -382,6 +386,8 @@
           <content-type name="Java" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JSON" enabled="true" />
+          <content-type name="JSON5" enabled="true" />
           <content-type name="Groovy" enabled="true" />
           <content-type name="AIDL" enabled="true" />
           <content-type name="YAML" enabled="true" />

@@ -1,6 +1,8 @@
 package com.p9j7.pcbuilder.Model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -12,19 +14,16 @@ public class Part {
     private String imgPath;
     private String title;
     private double price;
+    @ColumnInfo(defaultValue = "0")
     private double score;
     private String detail;
     private String category;
 
-    public Part(int partId, int schemeId, String imgPath, String title, double price, double score, String detail, String category) {
+    public Part(int partId, int schemeId, String title, double price) {
         this.partId = partId;
         this.schemeId = schemeId;
-        this.imgPath = imgPath;
         this.title = title;
         this.price = price;
-        this.score = score;
-        this.detail = detail;
-        this.category = category;
     }
 
     public String getCategory() {
