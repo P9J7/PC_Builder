@@ -16,10 +16,19 @@ import java.util.List;
 public class SchemeViewModel extends AndroidViewModel {
     private SchemeRepo schemeRepo;
     private final MutableLiveData<SchemeWithParts> selected = new MutableLiveData<>();
+    private final MutableLiveData<Part> partSelected = new MutableLiveData<>();
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
         schemeRepo = new SchemeRepo(application);
+    }
+
+    public MutableLiveData<Part> getPartSelected() {
+        return partSelected;
+    }
+
+    public void partSelect(Part part) {
+        partSelected.setValue(part);
     }
 
     public void select(SchemeWithParts scheme) {

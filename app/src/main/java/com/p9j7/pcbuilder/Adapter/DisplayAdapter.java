@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Util.LoadImage;
@@ -19,6 +20,7 @@ import com.p9j7.pcbuilder.Util.LoadImage;
 import java.util.List;
 
 public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayViewHolder> {
+    private SchemeViewModel schemeViewModel;
     private Context context;
     private List<Part> parts;
 
@@ -32,7 +34,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         mOnItemClickListener = onItemClickListener;
     }
 
-    public DisplayAdapter(Context context) {
+    public DisplayAdapter(SchemeViewModel schemeViewModel, Context context) {
         super(new DiffUtil.ItemCallback<Part>() {
             @Override
             public boolean areItemsTheSame(@NonNull Part oldItem, @NonNull Part newItem) {
@@ -47,6 +49,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
                         oldItem.getCategory().equals(newItem.getTitle()));
             }
         });
+        this.schemeViewModel = schemeViewModel;
         this.context = context;
     }
 
@@ -60,7 +63,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
             @Override
             public void onClick(View v) {
                 // 跳转到配置详情界面
-//                schemeViewModel.select(schemes.get(holder.getAdapterPosition()));
+                schemeViewModel.partSelect(parts.get(holder.getAdapterPosition()));
                 mOnItemClickListener.onItemClick();
             }
         });

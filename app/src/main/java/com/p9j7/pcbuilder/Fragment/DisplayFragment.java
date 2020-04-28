@@ -52,6 +52,7 @@ public class DisplayFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
         ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
@@ -64,25 +65,27 @@ public class DisplayFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         recyclerView = getActivity().findViewById(R.id.recyclerDisplay);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        displayAdapter = new DisplayAdapter(getContext());
         partList = new ArrayList<>();
-        displayAdapter.setParts(partList);
+
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
+        displayAdapter = new DisplayAdapter(schemeViewModel, getContext());
+        displayAdapter.setParts(partList);
+        displayAdapter.setOnItemClickListener(new SchemeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+                //todo 做新的详情页
+                NavHostFragment.findNavController(DisplayFragment.this)
+                        .navigate(R.id.action_displayFragment_to_partFragment);
+//                .navigateUp();
+            }
+        });
         schemeViewModel.getSelected().observe(getViewLifecycleOwner(), scheme -> {
             TextView schemeName = getActivity().findViewById(R.id.schemeName);
             schemeName.setText(scheme.getScheme().getName());
             TextView schemePrice = getActivity().findViewById(R.id.schemePrice);
             schemePrice.setText("￥" + scheme.getScheme().getPrice());
             displayAdapter.setParts(scheme.getParts());
-            //TODO 更新UI
-//            schemeViewModel.getAllPartBySchemeId(scheme.getScheme().getSchemeId()).observe(getViewLifecycleOwner(), parts -> displayAdapter.setParts(parts));
         });
-//        schemeViewModel.getAllScheme().observe(getViewLifecycleOwner(), new Observer<List<Part>>() {
-//            @Override
-//            public void onChanged(List<Part> parts) {
-//                displayAdapter.setParts(parts);
-//            }
-//        });
         recyclerView.setAdapter(displayAdapter);
     }
 

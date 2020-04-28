@@ -22,4 +22,10 @@
     <string name="share">Share</string>
     <string name="copy_as_text">copy as text</string>
     <string name="save_to_pic">save to jpg</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="remove">REMOVE</string>
+    <string name="sw">SWITCH</string>
+    <string name="buy">Buy from</string>
 </resources>

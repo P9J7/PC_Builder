@@ -48,7 +48,6 @@ public class IndexFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(IndexFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
-
             }
         });
     }
@@ -72,6 +71,7 @@ public class IndexFragment extends Fragment {
         });
         //todo 接下来要怎么做？
         schemeViewModel.getSchemesAndParts().observe(getViewLifecycleOwner(), schemeWithParts -> {
+            //todo 图片顺序显示怎么实现？
             schemeWithParts.forEach(item -> schemeWithPartsList.add(item));
             schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
         });
