@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/share"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/text"
+                android:title="@string/copy_as_text" />
+            <item
+                android:id="@+id/pic"
+                android:title="@string/save_to_pic" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/edit"
+        android:title="@string/edit"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/copy"
+        android:title="@string/copy" />
+    <item
+        android:id="@+id/delete"
+        android:title="@string/delete" />
+</menu>

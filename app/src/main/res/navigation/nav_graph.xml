@@ -13,7 +13,7 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment"
+            app:destination="@id/buildFragment"
             app:enterAnim="@anim/in_from_right"
             app:exitAnim="@anim/out_to_left"
             app:popEnterAnim="@anim/in_from_right"
@@ -27,10 +27,10 @@
             app:popExitAnim="@anim/out_to_left" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.p9j7.pcbuilder.Fragment.SecondFragment"
+        android:id="@+id/buildFragment"
+        android:name="com.p9j7.pcbuilder.Fragment.BuildFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second"/>
+        tools:layout="@layout/fragment_build"/>
     <fragment
         android:id="@+id/displayFragment"
         android:name="com.p9j7.pcbuilder.Fragment.DisplayFragment"

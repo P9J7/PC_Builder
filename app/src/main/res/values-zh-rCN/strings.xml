@@ -22,4 +22,5 @@
     <string name="remove">删除</string>
     <string name="sw">替换</string>
     <string name="buy">购买</string>
+    <string name="new_build">新建</string>
 </resources>
