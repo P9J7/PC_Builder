@@ -1,6 +1,5 @@
 package com.p9j7.pcbuilder.Data;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
@@ -34,6 +33,13 @@ public class SchemeViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<List<Object>> getMixList() {
+        return mixList;
+    }
+
+    public MutableLiveData<List<Object>> setMixListByIndex(int i, Object object) {
+        List<Object> old = this.getMixList().getValue();
+        old.set(i, object);
+        this.mixList.setValue(old);
         return mixList;
     }
 

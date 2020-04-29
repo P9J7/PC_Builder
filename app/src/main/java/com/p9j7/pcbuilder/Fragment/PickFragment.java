@@ -1,22 +1,7 @@
 package com.p9j7.pcbuilder.Fragment;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,8 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.p9j7.pcbuilder.Adapter.DisplayAdapter;
-import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.R;
@@ -40,8 +35,11 @@ public class PickFragment extends Fragment {
     private DisplayAdapter displayAdapter;
     private SchemeViewModel schemeViewModel;
     private List<Part> partList;
+    private Bundle toolbarType;
     public PickFragment() {
         // Required empty public constructor
+        toolbarType = new Bundle();
+        toolbarType.putString("toolbarType", "pickToolbar");
     }
 
     @Override
@@ -70,13 +68,26 @@ public class PickFragment extends Fragment {
         schemeViewModel.getPickTitle().observe(getViewLifecycleOwner(), actionBar::setTitle);
         displayAdapter = new DisplayAdapter(schemeViewModel, getContext());
         recyclerView = getActivity().findViewById(R.id.recyclerPick);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         partList = new ArrayList<>();
+        //todo 从网络爬取数据封装在一个Part集合里
+//        partList.addAll();
+
+        List<Part> parts = new ArrayList<>();
+        parts.add(new Part(50, "http://img12.360buyimg.com/n1/s450x450_jfs/t1/46613/28/13064/384165/5da03815E3f14a325/f0c6d7871d68b5f3.jpg",
+                "爱国者（aigo）炫影黑京东特别版", 199.0));
+        parts.add(new Part(51, "http://img13.360buyimg.com/n1/s450x450_jfs/t1/68742/5/8070/124190/5d60da61Ecf10e671/b7d1381c2cfe2954.jpg",
+                "先马（SAMA）黑洞 黑色 中塔式机箱", 299.0));
+        parts.add(new Part(52, "http://img14.360buyimg.com/n1/s450x450_jfs/t1/117374/4/1146/184753/5e9523d9E6bc6b4e6/ccd117666037dde5.jpg",
+                "鑫谷（Segotep）LUX重装版全侧透白色机箱", 199.0));
+        partList.addAll(parts);
+
         displayAdapter.setParts(partList);
         displayAdapter.setOnItemClickListener(() -> {
             //todo 跳转到详情页，通过改变toolbar的可见性来复用！！！
             NavHostFragment.findNavController(PickFragment.this)
-                    .navigate(R.id.action_displayFragment_to_partFragment);
+                    .navigate(R.id.action_pickFragment_to_partFragment, toolbarType);
 //                .navigateUp();
         });
         recyclerView.setAdapter(displayAdapter);

@@ -1,7 +1,9 @@
 package com.p9j7.pcbuilder.Model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -21,6 +23,14 @@ public class Part {
     public Part(int partId, int schemeForeId, String title, double price) {
         this.partId = partId;
         this.schemeForeId = schemeForeId;
+        this.title = title;
+        this.price = price;
+    }
+
+    @Ignore
+    public Part(int partId, String imgPath, String title, double price) {
+        this.partId = partId;
+        this.imgPath = imgPath;
         this.title = title;
         this.price = price;
     }
@@ -87,5 +97,11 @@ public class Part {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return title.toString();
     }
 }

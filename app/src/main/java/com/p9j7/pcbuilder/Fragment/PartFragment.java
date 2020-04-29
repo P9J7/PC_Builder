@@ -1,13 +1,6 @@
 package com.p9j7.pcbuilder.Fragment;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Util.LoadImage;
 
+import static android.view.View.VISIBLE;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PartFragment extends Fragment {
@@ -27,9 +27,12 @@ public class PartFragment extends Fragment {
     private TextView partPrice;
     private TextView partReview;
     private SchemeViewModel schemeViewModel;
+    private Bundle deleteViewType;
 
     public PartFragment() {
         // Required empty public constructor
+        deleteViewType = new Bundle();
+        deleteViewType.putInt("deleteViewType", VISIBLE);
     }
 
     @Override
@@ -42,6 +45,14 @@ public class PartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // todo:动态改变toolbar的状态
+        if (getArguments() != null && getArguments().getString("toolbarType") != null) {
+            switch (getArguments().getString("toolbarType")) {
+                case "pickToolbar":
+                    getActivity().findViewById(R.id.toolbar2).setVisibility(View.GONE);
+                    getActivity().findViewById(R.id.toolbar5).setVisibility(View.VISIBLE);
+            }
+        }
         partPicItem = getActivity().findViewById(R.id.partPicItem1);
         partName = getActivity().findViewById(R.id.partName2);
         partPrice = getActivity().findViewById(R.id.partPrice2);
@@ -59,6 +70,16 @@ public class PartFragment extends Fragment {
             partName.setText(part.getTitle());
             partPrice.setText("￥" + part.getPrice());
             LoadImage.glideClrcle(getContext(), part.getImgPath(), partPicItem);
+        });
+        // todo 改变viewmodel里面的混合list
+        getActivity().findViewById(R.id.addText).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                schemeViewModel.setMixListByIndex(6, schemeViewModel.getPartSelected().getValue());
+                NavHostFragment.findNavController(PartFragment.this)
+                        // TODO 去使用这个bundle改变删除图标的可视状态
+                        .navigate(R.id.action_partFragment_to_buildFragment, deleteViewType);
+            }
         });
     }
 }

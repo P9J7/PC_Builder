@@ -1,8 +1,12 @@
 package com.p9j7.pcbuilder.Fragment;
 
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,24 +18,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.p9j7.pcbuilder.Adapter.BuilderAdapter;
-import com.p9j7.pcbuilder.Adapter.DisplayAdapter;
 import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
-import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.R;
 
 import java.util.List;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class BuildFragment extends Fragment {
@@ -89,7 +81,7 @@ public class BuildFragment extends Fragment {
             }
         });
         //todo 在这里实现更改List内容，用反射判断item的类型改变 viewType
-//        schemeViewModel.getMixList().observe(getViewLifecycleOwner(), objects -> builderAdapter.setUnsureList(objects));
+        schemeViewModel.getMixList().observe(getViewLifecycleOwner(), objects -> builderAdapter.setUnsureList(objects));
         recyclerView.setAdapter(builderAdapter);
     }
 
