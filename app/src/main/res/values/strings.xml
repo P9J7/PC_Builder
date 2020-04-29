@@ -28,4 +28,14 @@
     <string name="sw">SWITCH</string>
     <string name="buy">Buy from</string>
     <string name="new_build">New_Build</string>
+    <string name="pick_processor">PICK PROCESSOR</string>
+    <string name="pick_motherboard">PICK MOTHERBOARD</string>
+    <string name="pick_gpu">PICK GPU</string>
+    <string name="pick_mem">PICK MEMORY</string>
+    <string name="pick_storeage">PICK STORAGE</string>
+    <string name="pick_psu">PICK PSU</string>
+    <string name="pick_casing">PICK CASING</string>
+    <string name="search_tooltip">Search parts</string>
+    <string name="total">TOTAL：</string>
+    <string name="add_to_build">ADD TO BUILD</string>
 </resources>

@@ -30,7 +30,11 @@
         android:id="@+id/buildFragment"
         android:name="com.p9j7.pcbuilder.Fragment.BuildFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_build"/>
+        tools:layout="@layout/fragment_build">
+        <action
+            android:id="@+id/action_buildFragment_to_pickFragment"
+            app:destination="@id/pickFragment" />
+    </fragment>
     <fragment
         android:id="@+id/displayFragment"
         android:name="com.p9j7.pcbuilder.Fragment.DisplayFragment"
@@ -47,4 +51,13 @@
         android:name="com.p9j7.pcbuilder.Fragment.PartFragment"
         android:label="fragment_part"
         tools:layout="@layout/fragment_part" />
+    <fragment
+        android:id="@+id/pickFragment"
+        android:name="com.p9j7.pcbuilder.Fragment.PickFragment"
+        android:label="fragment_pick"
+        tools:layout="@layout/fragment_pick" >
+        <action
+            android:id="@+id/action_pickFragment_to_partFragment"
+            app:destination="@id/partFragment" />
+    </fragment>
 </navigation>

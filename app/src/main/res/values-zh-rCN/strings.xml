@@ -23,4 +23,14 @@
     <string name="sw">替换</string>
     <string name="buy">购买</string>
     <string name="new_build">新建</string>
+    <string name="pick_processor">挑选CPU</string>
+    <string name="pick_motherboard">挑选主板</string>
+    <string name="pick_gpu">挑选显卡</string>
+    <string name="pick_mem">挑选内存</string>
+    <string name="pick_storeage">挑选硬盘</string>
+    <string name="pick_psu">挑选电源</string>
+    <string name="pick_casing">挑选机箱</string>
+    <string name="search_tooltip">搜索配件</string>
+    <string name="total">合计</string>
+    <string name="add_to_build">添加到配置</string>
 </resources>
