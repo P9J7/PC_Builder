@@ -1,19 +1,6 @@
 package com.p9j7.pcbuilder.Fragment;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,12 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.p9j7.pcbuilder.Adapter.DisplayAdapter;
-import com.p9j7.pcbuilder.Model.Part;
-import com.p9j7.pcbuilder.R;
-import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
+import com.p9j7.pcbuilder.Model.Part;
+import com.p9j7.pcbuilder.R;
 
 import java.util.ArrayList;
 import java.util.List;

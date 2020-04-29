@@ -27,12 +27,9 @@ public class PartFragment extends Fragment {
     private TextView partPrice;
     private TextView partReview;
     private SchemeViewModel schemeViewModel;
-    private Bundle deleteViewType;
 
     public PartFragment() {
         // Required empty public constructor
-        deleteViewType = new Bundle();
-        deleteViewType.putInt("deleteViewType", VISIBLE);
     }
 
     @Override
@@ -76,9 +73,11 @@ public class PartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 schemeViewModel.setMixListByIndex(6, schemeViewModel.getPartSelected().getValue());
+                // 使用viewmodel改变删除按钮的可见性
+                schemeViewModel.setDeleteBtnVisible(VISIBLE);
                 NavHostFragment.findNavController(PartFragment.this)
                         // TODO 去使用这个bundle改变删除图标的可视状态
-                        .navigate(R.id.action_partFragment_to_buildFragment, deleteViewType);
+                        .navigate(R.id.action_partFragment_to_buildFragment);
             }
         });
     }

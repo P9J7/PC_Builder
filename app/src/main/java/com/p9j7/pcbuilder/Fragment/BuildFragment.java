@@ -25,6 +25,8 @@ import com.p9j7.pcbuilder.R;
 
 import java.util.List;
 
+import static android.view.View.VISIBLE;
+
 
 public class BuildFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -46,7 +48,7 @@ public class BuildFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.toolbar).setVisibility(VISIBLE);
         ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.new_build);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -76,6 +77,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         holder.partName.setText(part.getTitle());
         holder.partPrice.setText("￥" + part.getPrice());
         LoadImage.glideClrcle(context, part.getImgPath(), holder.partPic);
+        holder.deleteBtn.setVisibility(schemeViewModel.getDeleteBtnVisible());
     }
 
     public void setParts(List<Part> parts) {
@@ -88,16 +90,18 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         return parts.size();
     }
 
-    public class DisplayViewHolder extends RecyclerView.ViewHolder {
-        private TextView partName;
-        private TextView partPrice;
-        private TextView partDetail;
-        private ImageView partPic;
+    public static class DisplayViewHolder extends RecyclerView.ViewHolder {
+        public TextView partName;
+        public TextView partPrice;
+        public TextView partDetail;
+        public ImageView partPic;
+        public ImageButton deleteBtn;
         public DisplayViewHolder(@NonNull View itemView) {
             super(itemView);
             partName = itemView.findViewById(R.id.partName);
             partPrice = itemView.findViewById(R.id.partPrice);
             partPic = itemView.findViewById(R.id.partPic);
+            deleteBtn = itemView.findViewById(R.id.deleteBtnBuild);
         }
     }
 }

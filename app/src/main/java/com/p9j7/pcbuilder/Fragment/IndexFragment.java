@@ -1,7 +1,6 @@
 package com.p9j7.pcbuilder.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +13,15 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.p9j7.pcbuilder.Model.SchemeWithParts;
-import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
+import com.p9j7.pcbuilder.Model.SchemeWithParts;
+import com.p9j7.pcbuilder.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
+import static android.view.View.INVISIBLE;
 
 public class IndexFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -65,6 +64,7 @@ public class IndexFragment extends Fragment {
         schemeAdapter.setOnItemClickListener(new SchemeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick() {
+                schemeViewModel.setDeleteBtnVisible(INVISIBLE);
                 NavHostFragment.findNavController(IndexFragment.this)
                         .navigate(R.id.action_FirstFragment_to_displayFragment);
             }

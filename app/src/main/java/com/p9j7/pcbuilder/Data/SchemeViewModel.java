@@ -17,12 +17,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.view.View.GONE;
+
 public class SchemeViewModel extends AndroidViewModel {
     private  MutableLiveData<List<Object>> mixList;
     private SchemeRepo schemeRepo;
     private final MutableLiveData<SchemeWithParts> selected = new MutableLiveData<>();
     private final MutableLiveData<Part> partSelected = new MutableLiveData<>();
     private final MutableLiveData<String> pickTitle = new MutableLiveData<>();
+    private Integer deleteBtnVisible;
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
@@ -30,6 +33,15 @@ public class SchemeViewModel extends AndroidViewModel {
         Context context = application.getApplicationContext();
         this.mixList = new MutableLiveData<>(new ArrayList<>(Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
                 context.getString(R.string.pick_mem), context.getString(R.string.pick_storeage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing))));
+        this.deleteBtnVisible = GONE;
+    }
+
+    public Integer getDeleteBtnVisible() {
+        return deleteBtnVisible;
+    }
+
+    public void setDeleteBtnVisible(Integer deleteBtnVisible) {
+        this.deleteBtnVisible = deleteBtnVisible;
     }
 
     public MutableLiveData<List<Object>> getMixList() {

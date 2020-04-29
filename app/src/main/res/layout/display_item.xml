@@ -21,10 +21,11 @@
 
         <TextView
             android:id="@+id/partName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="i5-9400F"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/partPic"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,12 +71,12 @@
             app:layout_constraintEnd_toStartOf="@+id/textView7" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/deleteBtnBuild"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@color/no_background"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
