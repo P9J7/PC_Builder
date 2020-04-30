@@ -77,7 +77,8 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         holder.partName.setText(part.getTitle());
         holder.partPrice.setText("￥" + part.getPrice());
         LoadImage.glideClrcle(context, part.getImgPath(), holder.partPic);
-        holder.deleteBtn.setVisibility(schemeViewModel.getDeleteBtnVisible());
+        // fix 因为不同的BindViewHolder和不同的视图绑定，共享的只是ViewHolder模型而已，所以可以直接更改可见性而不需要通过ViewModel
+        holder.deleteBtn.setVisibility(View.GONE);
     }
 
     public void setParts(List<Part> parts) {

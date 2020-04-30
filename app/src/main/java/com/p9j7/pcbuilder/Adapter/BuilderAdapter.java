@@ -114,6 +114,12 @@ public class BuilderAdapter extends ListAdapter<Object, RecyclerView.ViewHolder>
             DisplayAdapter.DisplayViewHolder displayViewHolder = (DisplayAdapter.DisplayViewHolder) holder;
             displayViewHolder.partName.setText(part.getTitle());
             displayViewHolder.partPrice.setText("￥" + part.getPrice());
+            displayViewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    schemeViewModel.setMixListByIndex(holder.getAdapterPosition(), schemeViewModel.getDefaultPickTexts().get(holder.getAdapterPosition()));
+                }
+            });
             LoadImage.glideClrcle(context, part.getImgPath(), displayViewHolder.partPic);
             // todo 这里去实现switch 配件的功能
         }

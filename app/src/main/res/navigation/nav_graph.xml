@@ -50,11 +50,7 @@
         android:id="@+id/partFragment"
         android:name="com.p9j7.pcbuilder.Fragment.PartFragment"
         android:label="fragment_part"
-        tools:layout="@layout/fragment_part">
-        <action
-            android:id="@+id/action_partFragment_to_buildFragment"
-            app:destination="@id/buildFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_part" />
     <fragment
         android:id="@+id/pickFragment"
         android:name="com.p9j7.pcbuilder.Fragment.PickFragment"

@@ -18,7 +18,6 @@ import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Util.LoadImage;
 
-import static android.view.View.VISIBLE;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PartFragment extends Fragment {
@@ -73,11 +72,10 @@ public class PartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 schemeViewModel.setMixListByIndex(schemeViewModel.getAdapterPosition(), schemeViewModel.getPartSelected().getValue());
-                // 使用viewmodel改变删除按钮的可见性
-                schemeViewModel.setDeleteBtnVisible(VISIBLE);
-                NavHostFragment.findNavController(PartFragment.this)
-                        // TODO 去使用这个bundle改变删除图标的可视状态
-                        .navigate(R.id.action_partFragment_to_buildFragment);
+                // popBackStack跳过一个返回栈，直接跳到BuildFragment
+                NavHostFragment.findNavController(PartFragment.this).popBackStack();
+                NavHostFragment.findNavController(PartFragment.this).navigateUp();
+//                        .navigate(R.id.action_partFragment_to_buildFragment);
             }
         });
     }

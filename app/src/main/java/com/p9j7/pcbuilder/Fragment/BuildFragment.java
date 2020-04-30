@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +26,6 @@ import com.p9j7.pcbuilder.R;
 
 import java.util.List;
 
-import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 
@@ -69,6 +69,7 @@ public class BuildFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recyclerView = getActivity().findViewById(R.id.recyclerBuilder);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
         builderAdapter = new BuilderAdapter(schemeViewModel, getContext());
         unsureList = schemeViewModel.getMixList().getValue();
@@ -78,7 +79,6 @@ public class BuildFragment extends Fragment {
             @Override
             public void onItemClick() {
                 //todo 做新的详情页
-                schemeViewModel.setDeleteBtnVisible(GONE);
                 NavHostFragment.findNavController(BuildFragment.this)
                         .navigate(R.id.action_buildFragment_to_pickFragment);
 //                .navigateUp();
@@ -111,6 +111,9 @@ public class BuildFragment extends Fragment {
                 ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setTitle("PC Builder");
+//                NavHostFragment.findNavController(BuildFragment.this).popBackStack();
+//                NavHostFragment.findNavController(BuildFragment.this).popBackStack();
+//                NavHostFragment.findNavController(BuildFragment.this).popBackStack();
                 NavHostFragment.findNavController(BuildFragment.this).navigateUp();
                 return true;
             default:

@@ -27,7 +27,7 @@
     <string name="pick_motherboard">挑选主板</string>
     <string name="pick_gpu">挑选显卡</string>
     <string name="pick_mem">挑选内存</string>
-    <string name="pick_storeage">挑选硬盘</string>
+    <string name="pick_storage">挑选硬盘</string>
     <string name="pick_psu">挑选电源</string>
     <string name="pick_casing">挑选机箱</string>
     <string name="search_tooltip">搜索配件</string>

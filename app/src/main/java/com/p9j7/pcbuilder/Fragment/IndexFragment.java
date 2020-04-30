@@ -21,8 +21,6 @@ import com.p9j7.pcbuilder.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.view.View.INVISIBLE;
-
 public class IndexFragment extends Fragment {
     private RecyclerView recyclerView;
     private SchemeAdapter schemeAdapter;
@@ -64,7 +62,6 @@ public class IndexFragment extends Fragment {
         schemeAdapter.setOnItemClickListener(new SchemeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick() {
-                schemeViewModel.setDeleteBtnVisible(INVISIBLE);
                 NavHostFragment.findNavController(IndexFragment.this)
                         .navigate(R.id.action_FirstFragment_to_displayFragment);
             }
