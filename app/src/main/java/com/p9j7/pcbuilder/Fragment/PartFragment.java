@@ -72,7 +72,7 @@ public class PartFragment extends Fragment {
         getActivity().findViewById(R.id.addText).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                schemeViewModel.setMixListByIndex(6, schemeViewModel.getPartSelected().getValue());
+                schemeViewModel.setMixListByIndex(schemeViewModel.getAdapterPosition(), schemeViewModel.getPartSelected().getValue());
                 // 使用viewmodel改变删除按钮的可见性
                 schemeViewModel.setDeleteBtnVisible(VISIBLE);
                 NavHostFragment.findNavController(PartFragment.this)

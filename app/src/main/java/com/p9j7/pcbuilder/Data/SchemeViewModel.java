@@ -26,6 +26,7 @@ public class SchemeViewModel extends AndroidViewModel {
     private final MutableLiveData<Part> partSelected = new MutableLiveData<>();
     private final MutableLiveData<String> pickTitle = new MutableLiveData<>();
     private Integer deleteBtnVisible;
+    private Integer adapterPosition;
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
@@ -94,5 +95,13 @@ public class SchemeViewModel extends AndroidViewModel {
 
     public MutableLiveData<String> getPickTitle() {
         return pickTitle;
+    }
+
+    public void setPickIndex(int adapterPosition) {
+        this.adapterPosition = adapterPosition;
+    }
+
+    public Integer getAdapterPosition() {
+        return adapterPosition;
     }
 }

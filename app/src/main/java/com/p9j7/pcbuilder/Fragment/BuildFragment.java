@@ -25,6 +25,7 @@ import com.p9j7.pcbuilder.R;
 
 import java.util.List;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 
@@ -77,6 +78,7 @@ public class BuildFragment extends Fragment {
             @Override
             public void onItemClick() {
                 //todo 做新的详情页
+                schemeViewModel.setDeleteBtnVisible(GONE);
                 NavHostFragment.findNavController(BuildFragment.this)
                         .navigate(R.id.action_buildFragment_to_pickFragment);
 //                .navigateUp();
