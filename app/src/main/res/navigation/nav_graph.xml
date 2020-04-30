@@ -16,15 +16,15 @@
             app:destination="@id/buildFragment"
             app:enterAnim="@anim/in_from_right"
             app:exitAnim="@anim/out_to_left"
-            app:popEnterAnim="@anim/in_from_right"
-            app:popExitAnim="@anim/out_to_left" />
+            app:popEnterAnim="@anim/in_from_left"
+            app:popExitAnim="@anim/out_to_right" />
         <action
             android:id="@+id/action_FirstFragment_to_displayFragment"
             app:destination="@id/displayFragment"
             app:enterAnim="@anim/in_from_right"
             app:exitAnim="@anim/out_to_left"
-            app:popEnterAnim="@anim/in_from_right"
-            app:popExitAnim="@anim/out_to_left" />
+            app:popEnterAnim="@anim/in_from_left"
+            app:popExitAnim="@anim/out_to_right" />
     </fragment>
     <fragment
         android:id="@+id/buildFragment"
@@ -33,7 +33,11 @@
         tools:layout="@layout/fragment_build">
         <action
             android:id="@+id/action_buildFragment_to_pickFragment"
-            app:destination="@id/pickFragment" />
+            app:destination="@id/pickFragment"
+            app:enterAnim="@anim/in_from_right"
+            app:exitAnim="@anim/out_to_left"
+            app:popEnterAnim="@anim/in_from_left"
+            app:popExitAnim="@anim/out_to_right" />
     </fragment>
     <fragment
         android:id="@+id/displayFragment"
@@ -44,7 +48,9 @@
             android:id="@+id/action_displayFragment_to_partFragment"
             app:destination="@id/partFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/partFragment"
@@ -58,6 +64,10 @@
         tools:layout="@layout/fragment_pick" >
         <action
             android:id="@+id/action_pickFragment_to_partFragment"
-            app:destination="@id/partFragment" />
+            app:destination="@id/partFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
 </navigation>

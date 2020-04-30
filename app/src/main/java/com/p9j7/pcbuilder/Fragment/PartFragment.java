@@ -73,9 +73,9 @@ public class PartFragment extends Fragment {
             public void onClick(View v) {
                 schemeViewModel.setMixListByIndex(schemeViewModel.getAdapterPosition(), schemeViewModel.getPartSelected().getValue());
                 // popBackStack跳过一个返回栈，直接跳到BuildFragment
-                NavHostFragment.findNavController(PartFragment.this).popBackStack();
-                NavHostFragment.findNavController(PartFragment.this).navigateUp();
-//                        .navigate(R.id.action_partFragment_to_buildFragment);
+//                NavHostFragment.findNavController(PartFragment.this).popBackStack();
+                NavHostFragment.findNavController(PartFragment.this).popBackStack(R.id.buildFragment, false);
+//                NavHostFragment.findNavController(PartFragment.this).navigateUp();
             }
         });
     }
