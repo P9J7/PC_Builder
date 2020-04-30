@@ -34,6 +34,7 @@ public class SchemeViewModel extends AndroidViewModel {
                 context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing))));
         // 这里必须new，否则引用的是同一个地址
         this.defaultPickTexts = new ArrayList<>(this.mixList.getValue());
+        this.adapterPosition = 0;
     }
 
     public List<Object> getDefaultPickTexts() {

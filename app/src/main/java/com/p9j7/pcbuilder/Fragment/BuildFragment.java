@@ -85,7 +85,7 @@ public class BuildFragment extends Fragment {
             }
         });
         //todo 在这里实现更改List内容，用反射判断item的类型改变 viewType
-        schemeViewModel.getMixList().observe(getViewLifecycleOwner(), objects -> builderAdapter.setUnsureList(objects));
+        schemeViewModel.getMixList().observe(getViewLifecycleOwner(), objects -> builderAdapter.setUnsureList(objects, schemeViewModel.getAdapterPosition()));
         recyclerView.setAdapter(builderAdapter);
     }
 

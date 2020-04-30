@@ -58,6 +58,11 @@ public class BuilderAdapter extends ListAdapter<Object, RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
+    public void setUnsureList(List<Object> objects, Integer adapterPosition) {
+        this.unsureList = objects;
+        notifyItemChanged(adapterPosition);
+    }
+
     public List<Object> getUnsureList() {
         return unsureList;
     }
