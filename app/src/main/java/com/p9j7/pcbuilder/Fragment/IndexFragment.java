@@ -1,6 +1,7 @@
 package com.p9j7.pcbuilder.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import com.p9j7.pcbuilder.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class IndexFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -68,6 +71,7 @@ public class IndexFragment extends Fragment {
         });
         //todo 接下来要怎么做？
         schemeViewModel.getSchemesAndParts().observe(getViewLifecycleOwner(), schemeWithParts -> {
+            Log.e(TAG, "onActivityCreated: 创建成功");
             //todo 图片顺序显示怎么实现？
             schemeWithParts.forEach(item -> schemeWithPartsList.add(item));
             schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);

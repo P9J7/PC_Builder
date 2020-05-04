@@ -12,8 +12,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
+import com.p9j7.pcbuilder.Model.SchemePartCrossRef;
 
-@Database(entities = {Scheme.class, Part.class}, version = 1, exportSchema = false)
+
+// TODO 每次添加一个entity类，一定要记得在这里加上！！！浪费了N个小时！靠！
+@Database(entities = {Scheme.class, Part.class, SchemePartCrossRef.class}, version = 1, exportSchema = false)
 public abstract class PCBuilderDatabase extends RoomDatabase {
     private static PCBuilderDatabase INSTANCE;
     static synchronized PCBuilderDatabase getDatabase(Context context) {
@@ -64,6 +67,19 @@ public abstract class PCBuilderDatabase extends RoomDatabase {
                             part.put("category", "dcard");
                             part.put("imgPath", "http://img13.360buyimg.com/n1/s450x450_jfs/t1/92400/11/3459/303467/5de0791aE86bc4677/daa6ab60c68a841b.jpg");
                             db.insert("part", OnConflictStrategy.REPLACE, part);
+                            ContentValues ref = new ContentValues();
+                            ref.put("schemeId", 1);
+                            ref.put("partId", 1);
+                            db.insert("crossref", OnConflictStrategy.REPLACE, ref);
+                            ref.put("schemeId", 1);
+                            ref.put("partId", 2);
+                            db.insert("crossref", OnConflictStrategy.REPLACE, ref);
+                            ref.put("schemeId", 2);
+                            ref.put("partId", 3);
+                            db.insert("crossref", OnConflictStrategy.REPLACE, ref);
+                            ref.put("schemeId", 2);
+                            ref.put("partId", 4);
+                            db.insert("crossref", OnConflictStrategy.REPLACE, ref);
                             db.setTransactionSuccessful();
                             db.endTransaction();
                         }
