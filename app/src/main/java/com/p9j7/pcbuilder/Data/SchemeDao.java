@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
+import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Model.SchemeWithParts;
 
@@ -22,4 +23,7 @@ public interface SchemeDao {
     @Transaction
     @Query("SELECT * FROM Scheme ORDER BY schemeId DESC")
     LiveData<List<SchemeWithParts>> getSchemesAndParts();
+
+    @Query("SELECT * FROM Part WHERE category = :category")
+    List<Part> getPartsByCategory(String category);
 }

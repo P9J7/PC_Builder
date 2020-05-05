@@ -24,7 +24,8 @@ public class PartFragment extends Fragment {
     private ImageView partPicItem;
     private TextView partName;
     private TextView partPrice;
-    private TextView partReview;
+    private TextView partCommentNumber;
+    private TextView partDetail;
     private SchemeViewModel schemeViewModel;
 
     public PartFragment() {
@@ -52,6 +53,8 @@ public class PartFragment extends Fragment {
         partPicItem = getActivity().findViewById(R.id.partPicItem1);
         partName = getActivity().findViewById(R.id.partName2);
         partPrice = getActivity().findViewById(R.id.partPrice2);
+        partCommentNumber = getActivity().findViewById(R.id.partNumber);
+        partDetail = getActivity().findViewById(R.id.partItemDetail);
         getActivity().findViewById(R.id.toolbar).setVisibility(View.GONE);
         getActivity().findViewById(R.id.backFloat).setOnClickListener(v -> NavHostFragment.findNavController(PartFragment.this)
                 .navigateUp());
@@ -65,6 +68,8 @@ public class PartFragment extends Fragment {
             Log.e(TAG, "onActivityCreated: " + part.getTitle());
             partName.setText(part.getTitle());
             partPrice.setText("￥" + part.getPrice());
+            partCommentNumber.setText(part.getCommentNumber().toString());
+            partDetail.setText(part.getDetail());
             LoadImage.glideClrcle(getContext(), part.getImgPath(), partPicItem);
         });
         // todo 改变viewmodel里面的混合list

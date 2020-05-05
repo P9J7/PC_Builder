@@ -5,10 +5,12 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Model.SchemeWithParts;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 class SchemeRepo {
     private LiveData<List<Scheme>> allScheme;
@@ -31,6 +33,23 @@ class SchemeRepo {
 
     public void insertSchemes(Scheme... schemes) {
         new InsertAsyncTask(schemeDao).execute(schemes);
+    }
+
+    public List<Part> getPartsByCategory(String category) throws ExecutionException, InterruptedException {
+        return new QueryAsyncTask(schemeDao).execute(category).get();
+    }
+
+    static class QueryAsyncTask extends AsyncTask<String, Void, List<Part>> {
+        private SchemeDao schemeDao;
+
+        public QueryAsyncTask(SchemeDao schemeDao) {
+            this.schemeDao = schemeDao;
+        }
+
+        @Override
+        protected List<Part> doInBackground(String... strings) {
+            return schemeDao.getPartsByCategory(strings[0]);
+        }
     }
 
     static class InsertAsyncTask extends AsyncTask<Scheme, Void, Void> {

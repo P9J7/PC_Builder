@@ -28,15 +28,17 @@
         android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/partReview1"
+                android:id="@+id/partNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -56,11 +58,13 @@
 
             <TextView
                 android:id="@+id/partName2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="16dp"
                 android:text="Intel Core i5-9400F"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/partPicItem1" />
 
@@ -85,35 +89,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/partName2" />
 
             <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+                android:id="@+id/partItemDetail"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Speed:3.6 to 4.9GHz\nCore:8/8"
+                app:layout_constraintEnd_toEndOf="@+id/partName2"
                 app:layout_constraintStart_toStartOf="@+id/partName2"
                 app:layout_constraintTop_toBottomOf="@+id/partPrice2" />
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Series: Core i5 9th Gen\nL3 Cache:12MB\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n滑动演示占用"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
             <ImageView
                 android:id="@+id/partPicItem1"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="48dp"
                 android:src="@drawable/cpu"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.104" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

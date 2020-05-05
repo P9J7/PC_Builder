@@ -1,13 +1,16 @@
 package com.p9j7.pcbuilder.Model;
 
 import androidx.room.Entity;
+import androidx.room.Index;
 
-@Entity(tableName = "crossref", primaryKeys = {"schemeId", "partId"})
+@Entity(tableName = "crossref", primaryKeys = {"schemeId", "partId"}, indices = {@Index("partId")})
 public class SchemePartCrossRef {
+    //    @NonNull
     private int schemeId;
-    private int partId;
+    //    @NonNull
+    private long partId;
 
-    public SchemePartCrossRef(int schemeId, int partId) {
+    public SchemePartCrossRef(int schemeId, long partId) {
         this.schemeId = schemeId;
         this.partId = partId;
     }
@@ -20,11 +23,11 @@ public class SchemePartCrossRef {
         this.schemeId = schemeId;
     }
 
-    public int getPartId() {
+    public long getPartId() {
         return partId;
     }
 
-    public void setPartId(int partId) {
+    public void setPartId(long partId) {
         this.partId = partId;
     }
 }

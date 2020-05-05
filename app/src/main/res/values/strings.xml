@@ -38,4 +38,5 @@
     <string name="search_tooltip">Search parts</string>
     <string name="total">TOTAL：</string>
     <string name="add_to_build">ADD TO BUILD</string>
+    <string name="pick_cooler">PICK COOLER</string>
 </resources>

@@ -15,7 +15,10 @@ import com.p9j7.pcbuilder.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class SchemeViewModel extends AndroidViewModel {
     private  MutableLiveData<List<Object>> mixList;
@@ -25,16 +28,27 @@ public class SchemeViewModel extends AndroidViewModel {
     private final MutableLiveData<String> pickTitle = new MutableLiveData<>();
     private Integer adapterPosition;
     private final List<Object> defaultPickTexts;
+    private final Map<Integer, String> intToCategory;
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
         schemeRepo = new SchemeRepo(application);
         Context context = application.getApplicationContext();
         this.mixList = new MutableLiveData<>(new ArrayList<>(Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
-                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing))));
+                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler))));
         // 这里必须new，否则引用的是同一个地址
         this.defaultPickTexts = new ArrayList<>(this.mixList.getValue());
         this.adapterPosition = 0;
+        this.intToCategory = new HashMap<>();
+        intToCategory.put(0, "cpu");
+        intToCategory.put(1, "motherboard");
+        intToCategory.put(2, "dcard");
+        intToCategory.put(3, "ram");
+        intToCategory.put(4, "storage");
+        intToCategory.put(5, "psu");
+        intToCategory.put(6, "casing");
+        intToCategory.put(7, "cooler");
+
     }
 
     public List<Object> getDefaultPickTexts() {
@@ -95,5 +109,9 @@ public class SchemeViewModel extends AndroidViewModel {
 
     public Integer getAdapterPosition() {
         return adapterPosition;
+    }
+
+    public List<Part> getPartsByCategory(Integer adapterPosition) throws ExecutionException, InterruptedException {
+        return schemeRepo.getPartsByCategory(intToCategory.get(adapterPosition));
     }
 }

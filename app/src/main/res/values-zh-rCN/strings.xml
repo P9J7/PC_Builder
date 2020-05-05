@@ -33,4 +33,5 @@
     <string name="search_tooltip">搜索配件</string>
     <string name="total">合计</string>
     <string name="add_to_build">添加到配置</string>
+    <string name="pick_cooler">挑选散热</string>
 </resources>

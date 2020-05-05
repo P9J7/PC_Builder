@@ -28,6 +28,7 @@ import com.p9j7.pcbuilder.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class PickFragment extends Fragment {
@@ -75,13 +76,20 @@ public class PickFragment extends Fragment {
         //todo 从网络爬取数据封装在一个Part集合里
 //        partList.addAll();
 
-        List<Part> parts = new ArrayList<>();
-        parts.add(new Part(50, "http://img12.360buyimg.com/n1/s450x450_jfs/t1/46613/28/13064/384165/5da03815E3f14a325/f0c6d7871d68b5f3.jpg",
-                "爱国者（aigo）炫影黑京东特别版", 199.0));
-        parts.add(new Part(51, "http://img13.360buyimg.com/n1/s450x450_jfs/t1/68742/5/8070/124190/5d60da61Ecf10e671/b7d1381c2cfe2954.jpg",
-                "先马（SAMA）黑洞 黑色 中塔式机箱", 299.0));
-        parts.add(new Part(52, "http://img14.360buyimg.com/n1/s450x450_jfs/t1/117374/4/1146/184753/5e9523d9E6bc6b4e6/ccd117666037dde5.jpg",
-                "鑫谷（Segotep）LUX重装版全侧透白色机箱", 199.0));
+        List<Part> parts = null;
+        try {
+            parts = schemeViewModel.getPartsByCategory(schemeViewModel.getAdapterPosition());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        parts.add(new Part(50, "http://img12.360buyimg.com/n1/s450x450_jfs/t1/46613/28/13064/384165/5da03815E3f14a325/f0c6d7871d68b5f3.jpg",
+//                "爱国者（aigo）炫影黑京东特别版", 199));
+//        parts.add(new Part(51, "http://img13.360buyimg.com/n1/s450x450_jfs/t1/68742/5/8070/124190/5d60da61Ecf10e671/b7d1381c2cfe2954.jpg",
+//                "先马（SAMA）黑洞 黑色 中塔式机箱", 299));
+//        parts.add(new Part(52, "http://img14.360buyimg.com/n1/s450x450_jfs/t1/117374/4/1146/184753/5e9523d9E6bc6b4e6/ccd117666037dde5.jpg",
+//                "鑫谷（Segotep）LUX重装版全侧透白色机箱", 199));
         partList.addAll(parts);
 
         displayAdapter.setParts(partList);

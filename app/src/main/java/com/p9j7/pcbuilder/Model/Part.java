@@ -8,24 +8,25 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Part {
-    @PrimaryKey(autoGenerate = true)
-    private int partId;
+    @PrimaryKey
+    private long partId;
     private String imgPath;
     private String title;
+    //todo 我靠，还必须不能用包装类
     private double price;
     @ColumnInfo(defaultValue = "0")
-    private double score;
+    private int commentNumber;
     private String detail;
     private String category;
 
-    public Part(int partId, String title, double price) {
+    public Part(long partId, String title, double price) {
         this.partId = partId;
         this.title = title;
         this.price = price;
     }
 
     @Ignore
-    public Part(int partId, String imgPath, String title, double price) {
+    public Part(long partId, String imgPath, String title, double price) {
         this.partId = partId;
         this.imgPath = imgPath;
         this.title = title;
@@ -40,11 +41,11 @@ public class Part {
         this.category = category;
     }
 
-    public int getPartId() {
+    public long getPartId() {
         return partId;
     }
 
-    public void setPartId(int partId) {
+    public void setPartId(long partId) {
         this.partId = partId;
     }
 
@@ -72,12 +73,12 @@ public class Part {
         this.price = price;
     }
 
-    public double getScore() {
-        return score;
+    public Integer getCommentNumber() {
+        return commentNumber;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setCommentNumber(Integer commentNumber) {
+        this.commentNumber = commentNumber;
     }
 
     public String getDetail() {

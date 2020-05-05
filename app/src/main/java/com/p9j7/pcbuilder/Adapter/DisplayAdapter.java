@@ -76,6 +76,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         final Part part = parts.get(position);
         holder.partName.setText(part.getTitle());
         holder.partPrice.setText("￥" + part.getPrice());
+        holder.partCommentNumber.setText(part.getCommentNumber().toString());
         LoadImage.glideClrcle(context, part.getImgPath(), holder.partPic);
         // fix 因为不同的BindViewHolder和不同的视图绑定，共享的只是ViewHolder模型而已，所以可以直接更改可见性而不需要通过ViewModel
         holder.deleteBtn.setVisibility(View.GONE);
@@ -94,7 +95,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
     public static class DisplayViewHolder extends RecyclerView.ViewHolder {
         public TextView partName;
         public TextView partPrice;
-        public TextView partDetail;
+        public TextView partCommentNumber;
         public ImageView partPic;
         public ImageButton deleteBtn;
         public DisplayViewHolder(@NonNull View itemView) {
@@ -103,6 +104,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
             partPrice = itemView.findViewById(R.id.partPrice);
             partPic = itemView.findViewById(R.id.partPic);
             deleteBtn = itemView.findViewById(R.id.deleteBtnBuild);
+            partCommentNumber = itemView.findViewById(R.id.partCommentNumber);
         }
     }
 }
