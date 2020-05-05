@@ -72,10 +72,6 @@ public class SchemeViewModel extends AndroidViewModel {
         return schemeRepo.getAllScheme();
     }
 
-    public LiveData<List<Part>> getAllPartBySchemeId(Integer schemeId) {
-        return schemeRepo.getAllPartBySchemeId(schemeId);
-    }
-
     public LiveData<List<SchemeWithParts>> getSchemesAndParts() {
         return schemeRepo.getSchemesAndParts();
     }

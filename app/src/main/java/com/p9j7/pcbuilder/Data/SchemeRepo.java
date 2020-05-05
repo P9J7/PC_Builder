@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Model.SchemeWithParts;
 
@@ -25,9 +24,6 @@ class SchemeRepo {
         return allScheme;
     }
 
-    public LiveData<List<Part>> getAllPartBySchemeId(Integer schemeId) {
-        return schemeDao.getAllPartBySchemeId(schemeId);
-    }
 
     public LiveData<List<SchemeWithParts>> getSchemesAndParts() {
         return schemeDao.getSchemesAndParts();

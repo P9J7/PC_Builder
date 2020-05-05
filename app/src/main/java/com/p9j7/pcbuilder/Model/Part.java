@@ -10,8 +10,6 @@ import androidx.room.PrimaryKey;
 public class Part {
     @PrimaryKey(autoGenerate = true)
     private int partId;
-    private int schemeForeId;
-    //当做商品id使用
     private String imgPath;
     private String title;
     private double price;
@@ -20,9 +18,8 @@ public class Part {
     private String detail;
     private String category;
 
-    public Part(int partId, int schemeForeId, String title, double price) {
+    public Part(int partId, String title, double price) {
         this.partId = partId;
-        this.schemeForeId = schemeForeId;
         this.title = title;
         this.price = price;
     }
@@ -49,14 +46,6 @@ public class Part {
 
     public void setPartId(int partId) {
         this.partId = partId;
-    }
-
-    public int getSchemeForeId() {
-        return schemeForeId;
-    }
-
-    public void setSchemeForeId(int schemeForeId) {
-        this.schemeForeId = schemeForeId;
     }
 
     public String getImgPath() {
