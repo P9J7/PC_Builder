@@ -79,6 +79,7 @@ public class BuildFragment extends Fragment {
             @Override
             public void onItemClick() {
                 //todo 做新的详情页
+                schemeViewModel.setQuickVisible(View.GONE);
                 NavHostFragment.findNavController(BuildFragment.this)
                         .navigate(R.id.action_buildFragment_to_pickFragment);
 //                .navigateUp();

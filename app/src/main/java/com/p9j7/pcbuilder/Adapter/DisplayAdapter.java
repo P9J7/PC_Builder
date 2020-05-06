@@ -44,8 +44,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
 
             @Override
             public boolean areContentsTheSame(@NonNull Part oldItem, @NonNull Part newItem) {
-                return (oldItem.getDetail().equals(newItem.getDetail()) &&
-                        oldItem.getPrice() == newItem.getPrice() &&
+                return (oldItem.getPrice() == newItem.getPrice() &&
                         oldItem.getTitle().equals(newItem.getTitle()) &&
                         oldItem.getCategory().equals(newItem.getTitle()));
             }

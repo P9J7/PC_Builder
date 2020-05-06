@@ -109,7 +109,7 @@ public class BuilderAdapter extends ListAdapter<Object, RecyclerView.ViewHolder>
             objectViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    schemeViewModel.setPickTitle(objectViewHolder.tip.getText().toString());
+                    schemeViewModel.setPickTitle(schemeViewModel.getDefaultPickTexts().get(objectViewHolder.getAdapterPosition()).toString());
                     mOnItemClickListener.onItemClick();
                     schemeViewModel.setPickIndex(objectViewHolder.getAdapterPosition());
                 }
@@ -125,8 +125,15 @@ public class BuilderAdapter extends ListAdapter<Object, RecyclerView.ViewHolder>
                     schemeViewModel.setMixListByIndex(holder.getAdapterPosition(), schemeViewModel.getDefaultPickTexts().get(holder.getAdapterPosition()));
                 }
             });
+            displayViewHolder.switchBtnLine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    schemeViewModel.setPickTitle(schemeViewModel.getDefaultPickTexts().get(displayViewHolder.getAdapterPosition()).toString());
+                    mOnItemClickListener.onItemClick();
+                    schemeViewModel.setPickIndex(displayViewHolder.getAdapterPosition());
+                }
+            });
             LoadImage.glideClrcle(context, part.getImgPath(), displayViewHolder.partPic);
-            // todo 这里去实现switch 配件的功能
         }
     }
 
