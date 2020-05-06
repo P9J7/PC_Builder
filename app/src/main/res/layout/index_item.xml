@@ -102,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="英特尔游戏主机"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -117,6 +118,7 @@
                 android:layout_marginTop="4dp"
                 android:text="￥3668.89"
                 android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/scheme_name"
                 app:layout_constraintTop_toBottomOf="@+id/scheme_name" />

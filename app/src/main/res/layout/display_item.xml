@@ -16,7 +16,8 @@
         <ImageView
             android:id="@+id/partPic"
             android:layout_width="139dp"
-            android:layout_height="95dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/cpu" />
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="i5-9400F"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/partPic"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,10 +37,9 @@
             android:id="@+id/partPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="￥999"
-            android:textColor="@android:color/holo_orange_dark"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/partName"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -47,8 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="评价"
+            android:layout_marginTop="4dp"
+            android:text="评价数"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/partName"
             app:layout_constraintTop_toBottomOf="@+id/partName" />
@@ -58,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="280000+"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.065"
             app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -76,12 +79,12 @@
             android:id="@+id/deleteBtnBuild"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@color/no_background"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/partPrice"
             app:srcCompat="@drawable/ic_delete_black_24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
