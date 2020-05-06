@@ -61,6 +61,10 @@ public class SchemeViewModel extends AndroidViewModel {
         this.quickVisible = quickVisible;
     }
 
+    public Map<Integer, String> getIntToCategory() {
+        return intToCategory;
+    }
+
     public List<Object> getDefaultPickTexts() {
         return defaultPickTexts;
     }
@@ -121,7 +125,11 @@ public class SchemeViewModel extends AndroidViewModel {
         return adapterPosition;
     }
 
-    public List<Part> getPartsByCategory(Integer adapterPosition) throws ExecutionException, InterruptedException {
+    public LiveData<List<Part>> getPartsByCategory(Integer adapterPosition) throws ExecutionException, InterruptedException {
         return schemeRepo.getPartsByCategory(intToCategory.get(adapterPosition));
+    }
+
+    public LiveData<List<Part>> findPartsWithPatternAndCategory(String pattern, String category) {
+        return schemeRepo.findPartsWithPatternAndCategory(pattern, category);
     }
 }

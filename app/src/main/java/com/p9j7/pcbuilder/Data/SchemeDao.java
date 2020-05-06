@@ -25,5 +25,8 @@ public interface SchemeDao {
     LiveData<List<SchemeWithParts>> getSchemesAndParts();
 
     @Query("SELECT * FROM Part WHERE category = :category")
-    List<Part> getPartsByCategory(String category);
+    LiveData<List<Part>> getPartsByCategory(String category);
+
+    @Query("SELECT * FROM Part WHERE category = :category AND title LIKE :pattern")
+    LiveData<List<Part>> findPartsWithPatternAndCategory(String pattern, String category);
 }

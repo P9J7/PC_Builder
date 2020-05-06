@@ -35,11 +35,15 @@ class SchemeRepo {
         new InsertAsyncTask(schemeDao).execute(schemes);
     }
 
-    public List<Part> getPartsByCategory(String category) throws ExecutionException, InterruptedException {
+    public LiveData<List<Part>> getPartsByCategory(String category) throws ExecutionException, InterruptedException {
         return new QueryAsyncTask(schemeDao).execute(category).get();
     }
 
-    static class QueryAsyncTask extends AsyncTask<String, Void, List<Part>> {
+    public LiveData<List<Part>> findPartsWithPatternAndCategory(String pattern, String category) {
+        return schemeDao.findPartsWithPatternAndCategory("%" + pattern + "%", category);
+    }
+
+    static class QueryAsyncTask extends AsyncTask<String, Void, LiveData<List<Part>>> {
         private SchemeDao schemeDao;
 
         public QueryAsyncTask(SchemeDao schemeDao) {
@@ -47,7 +51,7 @@ class SchemeRepo {
         }
 
         @Override
-        protected List<Part> doInBackground(String... strings) {
+        protected LiveData<List<Part>> doInBackground(String... strings) {
             return schemeDao.getPartsByCategory(strings[0]);
         }
     }

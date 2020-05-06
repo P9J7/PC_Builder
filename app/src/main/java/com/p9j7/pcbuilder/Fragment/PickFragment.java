@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -36,6 +38,7 @@ public class PickFragment extends Fragment {
     private DisplayAdapter displayAdapter;
     private SchemeViewModel schemeViewModel;
     private List<Part> partList;
+    private LiveData<List<Part>> partsQuery;
     private Bundle toolbarType;
     public PickFragment() {
         // Required empty public constructor
@@ -73,17 +76,6 @@ public class PickFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         partList = new ArrayList<>();
-
-        List<Part> parts = null;
-        try {
-            parts = schemeViewModel.getPartsByCategory(schemeViewModel.getAdapterPosition());
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        partList.addAll(parts);
-
         displayAdapter.setParts(partList);
         displayAdapter.setOnItemClickListener(() -> {
             //todo 跳转到详情页，通过改变linelayout组件的可见性来复用！！！
@@ -91,6 +83,14 @@ public class PickFragment extends Fragment {
                     .navigate(R.id.action_pickFragment_to_partFragment, toolbarType);
 //                .navigateUp();
         });
+        try {
+            partsQuery = schemeViewModel.getPartsByCategory(schemeViewModel.getAdapterPosition());
+            partsQuery.observe(getViewLifecycleOwner(), parts -> displayAdapter.setParts(parts));
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         recyclerView.setAdapter(displayAdapter);
     }
 
@@ -111,20 +111,19 @@ public class PickFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-//                String pattern = s.trim();
-//                filteredWords.removeObservers(getViewLifecycleOwner());
-//                filteredWords = wordViewModel.findWordsWithPattern(pattern);
-//                filteredWords.observe(getViewLifecycleOwner(), new Observer<List<Word>>() {
-//                    @Override
-//                    public void onChanged(List<Word> words) {
-//                        int temp = myAdapter1.getItemCount();
-//                        allWords = words;
-//                        if (temp != words.size()) {
-//                            myAdapter1.submitList(words);
-//                            myAdapter2.submitList(words);
-//                        }
-//                    }
-//                });
+                String pattern = s.trim();
+                partsQuery.removeObservers(getViewLifecycleOwner());
+                partsQuery = schemeViewModel.findPartsWithPatternAndCategory(pattern, schemeViewModel.getIntToCategory()
+                        .get(schemeViewModel.getAdapterPosition()));
+                partsQuery.observe(getViewLifecycleOwner(), new Observer<List<Part>>() {
+                    @Override
+                    public void onChanged(List<Part> parts) {
+                        int temp = displayAdapter.getItemCount();
+                        if (temp != parts.size()) {
+                            displayAdapter.setParts(parts);
+                        }
+                    }
+                });
                 return false;
             }
         });
