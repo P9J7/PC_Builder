@@ -2,6 +2,7 @@ package com.p9j7.pcbuilder.Data;
 
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -29,6 +30,7 @@ public class SchemeViewModel extends AndroidViewModel {
     private Integer adapterPosition;
     private final List<Object> defaultPickTexts;
     private final Map<Integer, String> intToCategory;
+    private Integer quickVisible;
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
@@ -48,7 +50,15 @@ public class SchemeViewModel extends AndroidViewModel {
         intToCategory.put(5, "psu");
         intToCategory.put(6, "casing");
         intToCategory.put(7, "cooler");
+        this.quickVisible = View.GONE;
+    }
 
+    public Integer getQuickVisible() {
+        return quickVisible;
+    }
+
+    public void setQuickVisible(Integer quickVisible) {
+        this.quickVisible = quickVisible;
     }
 
     public List<Object> getDefaultPickTexts() {

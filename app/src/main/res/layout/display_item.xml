@@ -13,6 +13,83 @@
         android:paddingRight="8dp"
         android:paddingBottom="16dp">
 
+        <LinearLayout
+            android:id="@+id/quickBtnLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/partName"
+            app:layout_constraintTop_toBottomOf="@+id/partPrice">
+
+            <LinearLayout
+                android:id="@+id/delBtnLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_customer_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingTop="4dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="4dp">
+
+                <ImageButton
+                    android:id="@+id/deleteBtnBuild"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/no_background"
+                    android:clickable="false"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_delete_black_24dp" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:text="@string/remove" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/swtichBtnLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_customer_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingTop="4dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="4dp">
+
+                <ImageButton
+                    android:id="@+id/deleteBtnBuild2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/no_background"
+                    android:clickable="false"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_switch" />
+
+                <TextView
+                    android:id="@+id/SWITCH2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:text="@string/sw" />
+
+            </LinearLayout>
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/partPic"
             android:layout_width="139dp"
@@ -74,18 +151,6 @@
             android:background="@android:color/holo_red_dark"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintEnd_toStartOf="@+id/textView7" />
-
-        <ImageButton
-            android:id="@+id/deleteBtnBuild"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@color/no_background"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/partPrice"
-            app:srcCompat="@drawable/ic_delete_black_24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

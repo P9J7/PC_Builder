@@ -33,10 +33,12 @@ public class DisplayFragment extends Fragment{
     private SchemeViewModel schemeViewModel;
     private DisplayAdapter displayAdapter;
     private List<Part> partList;
+    private Bundle toolbarType;
 
-
-    public static DisplayFragment newInstance() {
-        return new DisplayFragment();
+    public DisplayFragment() {
+        // Required empty public constructor
+        toolbarType = new Bundle();
+        toolbarType.putString("toolbarType", "partToolbar");
     }
 
     @Override
@@ -71,7 +73,7 @@ public class DisplayFragment extends Fragment{
             public void onItemClick() {
                 //todo 做新的详情页
                 NavHostFragment.findNavController(DisplayFragment.this)
-                        .navigate(R.id.action_displayFragment_to_partFragment);
+                        .navigate(R.id.action_displayFragment_to_partFragment, toolbarType);
 //                .navigateUp();
             }
         });

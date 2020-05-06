@@ -43,19 +43,20 @@ public class IndexFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.fab).setVisibility(View.VISIBLE);
-        getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(IndexFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
     }
 
     @Override
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
+        getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                schemeViewModel.setQuickVisible(View.VISIBLE);
+                NavHostFragment.findNavController(IndexFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
         recyclerView = getActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         schemeAdapter = new SchemeAdapter(schemeViewModel, getContext());
@@ -65,6 +66,7 @@ public class IndexFragment extends Fragment {
         schemeAdapter.setOnItemClickListener(new SchemeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick() {
+                schemeViewModel.setQuickVisible(View.GONE);
                 NavHostFragment.findNavController(IndexFragment.this)
                         .navigate(R.id.action_FirstFragment_to_displayFragment);
             }

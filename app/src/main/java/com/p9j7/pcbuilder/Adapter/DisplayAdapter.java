@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -79,7 +79,9 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         holder.partCommentNumber.setText(part.getCommentNumber().toString());
         LoadImage.glideClrcle(context, part.getImgPath(), holder.partPic);
         // fix 因为不同的BindViewHolder和不同的视图绑定，共享的只是ViewHolder模型而已，所以可以直接更改可见性而不需要通过ViewModel
-        holder.deleteBtn.setVisibility(View.GONE);
+//        holder.deleteBtn.setVisibility(View.GONE);
+        // todo 通过ViewModel更改两个可见性
+        holder.quickBtnLine.setVisibility(schemeViewModel.getQuickVisible());
     }
 
     public void setParts(List<Part> parts) {
@@ -97,14 +99,18 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         public TextView partPrice;
         public TextView partCommentNumber;
         public ImageView partPic;
-        public ImageButton deleteBtn;
+        public LinearLayout quickBtnLine;
+        public LinearLayout delBtnLine;
+        public LinearLayout switchBtnLine;
         public DisplayViewHolder(@NonNull View itemView) {
             super(itemView);
             partName = itemView.findViewById(R.id.partName);
             partPrice = itemView.findViewById(R.id.partPrice);
             partPic = itemView.findViewById(R.id.partPic);
-            deleteBtn = itemView.findViewById(R.id.deleteBtnBuild);
+            quickBtnLine = itemView.findViewById(R.id.quickBtnLine);
             partCommentNumber = itemView.findViewById(R.id.partCommentNumber);
+            delBtnLine = itemView.findViewById(R.id.delBtnLine);
+            switchBtnLine = itemView.findViewById(R.id.swtichBtnLine);
         }
     }
 }
