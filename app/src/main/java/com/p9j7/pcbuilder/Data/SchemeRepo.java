@@ -56,6 +56,13 @@ class SchemeRepo {
         }
     }
 
+    public void delete(Scheme scheme, List<Part> parts) {
+        new DeleteAsyncTask(schemeDao).execute(scheme);
+        parts.forEach(part -> {
+            new CrossrefDeleteAsyncTask(schemeDao).execute(new SchemePartCrossRef(scheme.getSchemeId(), part.getPartId()));
+        });
+    }
+
     static class CrossRefInsertAsyncTask extends AsyncTask<SchemePartCrossRef, Void, Void> {
         private SchemeDao schemeDao;
 
@@ -97,5 +104,33 @@ class SchemeRepo {
             return schemeDao.insertSchemes(schemes);
         }
 
+    }
+
+    static class DeleteAsyncTask extends AsyncTask<Scheme, Void, Void> {
+        private SchemeDao schemeDao;
+
+        public DeleteAsyncTask(SchemeDao schemeDao) {
+            this.schemeDao = schemeDao;
+        }
+
+        @Override
+        protected Void doInBackground(Scheme... schemes) {
+            schemeDao.delete(schemes);
+            return null;
+        }
+    }
+
+    static class CrossrefDeleteAsyncTask extends AsyncTask<SchemePartCrossRef, Void, Void> {
+        private SchemeDao schemeDao;
+
+        public CrossrefDeleteAsyncTask(SchemeDao schemeDao) {
+            this.schemeDao = schemeDao;
+        }
+
+        @Override
+        protected Void doInBackground(SchemePartCrossRef... crossRefs) {
+            schemeDao.deleteCrossRef(crossRefs);
+            return null;
+        }
     }
 }

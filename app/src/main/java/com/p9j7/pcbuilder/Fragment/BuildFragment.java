@@ -180,6 +180,9 @@ public class BuildFragment extends Fragment {
                     // 这里其实可以优化，把详情在上面的遍历中也传过来，这样在对话框中就不要遍历了
                     SaveDialogFragment saveDialogFragment = new SaveDialogFragment(schemeViewModel, toSaveParts, totalNumberLive.get());
                     saveDialogFragment.show(getActivity().getSupportFragmentManager(), null);
+                    ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setTitle("PC Builder");
                     return true;
                 }
                 return true;

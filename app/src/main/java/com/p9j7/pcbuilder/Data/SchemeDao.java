@@ -2,6 +2,7 @@ package com.p9j7.pcbuilder.Data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -34,4 +35,10 @@ public interface SchemeDao {
 
     @Insert
     void insertCrossRef(SchemePartCrossRef... schemePartCrossRefs);
+
+    @Delete
+    void delete(Scheme... schemes);
+
+    @Delete
+    void deleteCrossRef(SchemePartCrossRef... crossRefs);
 }

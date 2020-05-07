@@ -43,5 +43,7 @@
     <string name="tosave">Save Build?</string>
     <string name="save">Save</string>
     <string name="cancel">No</string>
+    <string name="back">Cancel</string>
     <string name="build_name">Build Name</string>
+    <string name="deltip">Delete Build</string>
 </resources>

@@ -24,6 +24,7 @@ import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.R;
+import com.p9j7.pcbuilder.Util.DeleteDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +102,13 @@ public class DisplayFragment extends Fragment{
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setTitle("PC Builder");
                 NavHostFragment.findNavController(DisplayFragment.this).navigateUp();
+                return true;
+            case R.id.delete:
+                DeleteDialogFragment deleteDialogFragment = new DeleteDialogFragment(schemeViewModel);
+                deleteDialogFragment.show(getActivity().getSupportFragmentManager(), null);
+                ActionBar actionBar1 = ((AppCompatActivity) getActivity()).getSupportActionBar();
+                actionBar1.setDisplayHomeAsUpEnabled(false);
+                actionBar1.setTitle("PC Builder");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

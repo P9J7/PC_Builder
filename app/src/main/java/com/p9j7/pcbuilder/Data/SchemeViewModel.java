@@ -143,4 +143,8 @@ public class SchemeViewModel extends AndroidViewModel {
     public void insertSchemeAndParts(Scheme scheme, List<Part> toSaveParts) {
         schemeRepo.insertSchemeAndParts(scheme, toSaveParts);
     }
+
+    public void delete(Scheme scheme, List<Part> parts) {
+        schemeRepo.delete(scheme, parts);
+    }
 }
