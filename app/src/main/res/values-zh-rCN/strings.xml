@@ -34,4 +34,9 @@
     <string name="total">合计</string>
     <string name="add_to_build">添加到配置</string>
     <string name="pick_cooler">挑选散热</string>
+    <string name="no_data">没有需要保存的数据</string>
+    <string name="tosave">保存配置？</string>
+    <string name="save">保存</string>
+    <string name="cancel">不保存</string>
+    <string name="build_name">配置名称</string>
 </resources>

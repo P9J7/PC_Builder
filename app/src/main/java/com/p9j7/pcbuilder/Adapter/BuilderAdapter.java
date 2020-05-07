@@ -53,11 +53,6 @@ public class BuilderAdapter extends ListAdapter<Object, RecyclerView.ViewHolder>
         this.schemeViewModel = schemeViewModel;
     }
 
-    public void setUnsureList(List<Object> list) {
-        this.unsureList = list;
-        notifyDataSetChanged();
-    }
-
     public void setUnsureList(List<Object> objects, Integer adapterPosition) {
         this.unsureList = objects;
         notifyItemChanged(adapterPosition);

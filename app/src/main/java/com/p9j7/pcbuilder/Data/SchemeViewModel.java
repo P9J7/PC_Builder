@@ -14,7 +14,6 @@ import com.p9j7.pcbuilder.Model.Scheme;
 import com.p9j7.pcbuilder.Model.SchemeWithParts;
 import com.p9j7.pcbuilder.R;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,18 +27,20 @@ public class SchemeViewModel extends AndroidViewModel {
     private final MutableLiveData<Part> partSelected = new MutableLiveData<>();
     private final MutableLiveData<String> pickTitle = new MutableLiveData<>();
     private Integer adapterPosition;
-    private final List<Object> defaultPickTexts;
+    //    private List<Object> defaultPickTexts;
     private final Map<Integer, String> intToCategory;
     private Integer quickVisible;
+    private Context context;
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
         schemeRepo = new SchemeRepo(application);
-        Context context = application.getApplicationContext();
-        this.mixList = new MutableLiveData<>(new ArrayList<>(Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
-                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler))));
+        context = application.getApplicationContext();
+        this.mixList = new MutableLiveData<>(Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
+                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler)));
         // 这里必须new，否则引用的是同一个地址
-        this.defaultPickTexts = new ArrayList<>(this.mixList.getValue());
+//        this.defaultPickTexts = Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
+//                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler));
         this.adapterPosition = 0;
         this.intToCategory = new HashMap<>();
         intToCategory.put(0, "cpu");
@@ -51,6 +52,10 @@ public class SchemeViewModel extends AndroidViewModel {
         intToCategory.put(6, "casing");
         intToCategory.put(7, "cooler");
         this.quickVisible = View.GONE;
+    }
+
+    public void setMixList(List<Object> mixList) {
+        this.mixList.setValue(mixList);
     }
 
     public Integer getQuickVisible() {
@@ -66,18 +71,20 @@ public class SchemeViewModel extends AndroidViewModel {
     }
 
     public List<Object> getDefaultPickTexts() {
-        return defaultPickTexts;
+        return Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
+                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler));
+//        return defaultPickTexts;
     }
 
     public MutableLiveData<List<Object>> getMixList() {
         return mixList;
     }
 
-    public MutableLiveData<List<Object>> setMixListByIndex(int i, Object object) {
+    public void setMixListByIndex(int i, Object object) {
         List<Object> old = this.getMixList().getValue();
+        // todo 这行代码会导致defaultPickTexts里面的常量改变！！！为什么？？？
         old.set(i, object);
         this.mixList.setValue(old);
-        return mixList;
     }
 
     public MutableLiveData<Part> getPartSelected() {
@@ -105,7 +112,7 @@ public class SchemeViewModel extends AndroidViewModel {
     }
 
 
-    void insertSchemes(Scheme scheme) {
+    public void insertSchemes(Scheme scheme) {
         schemeRepo.insertSchemes(scheme);
     }
 
@@ -131,5 +138,9 @@ public class SchemeViewModel extends AndroidViewModel {
 
     public LiveData<List<Part>> findPartsWithPatternAndCategory(String pattern, String category) {
         return schemeRepo.findPartsWithPatternAndCategory(pattern, category);
+    }
+
+    public void insertSchemeAndParts(Scheme scheme, List<Part> toSaveParts) {
+        schemeRepo.insertSchemeAndParts(scheme, toSaveParts);
     }
 }

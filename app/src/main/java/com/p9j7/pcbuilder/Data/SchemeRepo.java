@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Transaction;
 
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
+import com.p9j7.pcbuilder.Model.SchemePartCrossRef;
 import com.p9j7.pcbuilder.Model.SchemeWithParts;
 
 import java.util.List;
@@ -43,6 +45,32 @@ class SchemeRepo {
         return schemeDao.findPartsWithPatternAndCategory("%" + pattern + "%", category);
     }
 
+    @Transaction
+    public void insertSchemeAndParts(Scheme scheme, List<Part> toSaveParts) {
+        InsertAsyncTask schemeInsertTask = new InsertAsyncTask(schemeDao);
+        try {
+            List<Long> schemeId = schemeInsertTask.execute(scheme).get();
+            toSaveParts.forEach(item -> new CrossRefInsertAsyncTask(schemeDao).execute(new SchemePartCrossRef(schemeId.get(0).intValue(), item.getPartId())));
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static class CrossRefInsertAsyncTask extends AsyncTask<SchemePartCrossRef, Void, Void> {
+        private SchemeDao schemeDao;
+
+        CrossRefInsertAsyncTask(SchemeDao schemeDao) {
+            this.schemeDao = schemeDao;
+        }
+
+        @Override
+        protected Void doInBackground(SchemePartCrossRef... crossRefs) {
+            schemeDao.insertCrossRef(crossRefs);
+            return null;
+        }
+
+    }
+
     static class QueryAsyncTask extends AsyncTask<String, Void, LiveData<List<Part>>> {
         private SchemeDao schemeDao;
 
@@ -56,17 +84,17 @@ class SchemeRepo {
         }
     }
 
-    static class InsertAsyncTask extends AsyncTask<Scheme, Void, Void> {
+    static class InsertAsyncTask extends AsyncTask<Scheme, Void, List<Long>> {
         private SchemeDao schemeDao;
 
         InsertAsyncTask(SchemeDao schemeDao) {
             this.schemeDao = schemeDao;
         }
 
+
         @Override
-        protected Void doInBackground(Scheme... schemes) {
-            schemeDao.insertSchemes(schemes);
-            return null;
+        protected List<Long> doInBackground(Scheme... schemes) {
+            return schemeDao.insertSchemes(schemes);
         }
 
     }

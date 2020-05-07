@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/saveSchemeBtn"
         android:icon="@drawable/ic_save_black_24dp"
         android:title="Item"
         app:showAsAction="always" />

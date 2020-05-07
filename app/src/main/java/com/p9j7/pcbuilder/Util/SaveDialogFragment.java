@@ -48,13 +48,13 @@ public class SaveDialogFragment extends DialogFragment {
                         scheme.setDetail(schemeDetail);
                         scheme.setPrice(totalPrice);
                         scheme.setName(schemeName);
+                        schemeViewModel.insertSchemeAndParts(scheme, toSaveParts);
 //                        Log.e(TAG, "schemeDetail" + schemeDetail);
 //                        Log.e(TAG, "schemePrice" + totalPrice);
 //                        Log.e(TAG, "schemeName" + scheme.getName());
 //                        scheme.setName(s);
 //                        schemeViewModel.insertSchemeAndParts();
                         // 保存后返回主页
-                        List<Object> objects = schemeViewModel.getDefaultPickTexts();
                         schemeViewModel.setMixList(schemeViewModel.getDefaultPickTexts());
                         NavHostFragment.findNavController(SaveDialogFragment.this).navigateUp();
                     }
