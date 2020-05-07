@@ -36,7 +36,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/scheme_price">
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/cpuView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"
@@ -44,7 +44,7 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/dcardView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"
@@ -52,7 +52,7 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/motherboardView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"
@@ -60,7 +60,7 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/ramView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"
@@ -68,7 +68,7 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/storageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"
@@ -76,7 +76,7 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/psuView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"
@@ -84,7 +84,7 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/casingView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"
@@ -92,7 +92,7 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/coolerView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="5dp"

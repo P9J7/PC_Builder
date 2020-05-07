@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.SchemeWithParts;
 import com.p9j7.pcbuilder.R;
-import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.Util.LoadImage;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -90,6 +89,18 @@ public class SchemeAdapter extends ListAdapter<SchemeWithParts, SchemeAdapter.Sc
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.cpuPhoto);
                 } else if (item.getCategory().equals("dcard")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.dcardPhoto);
+                } else if (item.getCategory().equals("motherboard")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.motherboardPhoto);
+                } else if (item.getCategory().equals("ram")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.ramPhoto);
+                } else if (item.getCategory().equals("storage")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.storagePhoto);
+                } else if (item.getCategory().equals("psu")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.psuPhoto);
+                } else if (item.getCategory().equals("casing")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.casingPhoto);
+                } else if (item.getCategory().equals("cooler")) {
+                    LoadImage.glideClrcle(context, item.getImgPath(), holder.coolerPhoto);
                 }
             });
         }
@@ -122,14 +133,27 @@ public class SchemeAdapter extends ListAdapter<SchemeWithParts, SchemeAdapter.Sc
         private TextView schemeDetail;
         private ImageView cpuPhoto;
         private ImageView dcardPhoto;
+        private ImageView motherboardPhoto;
+        private ImageView psuPhoto;
+        private ImageView ramPhoto;
+        private ImageView storagePhoto;
+        private ImageView casingPhoto;
+        private ImageView coolerPhoto;
+
 
         public SchemeViewHolder(@NonNull View itemView) {
             super(itemView);
             schemeName = itemView.findViewById(R.id.scheme_name);
             schemePrice = itemView.findViewById(R.id.scheme_price);
             schemeDetail = itemView.findViewById(R.id.scheme_dtl);
-            cpuPhoto = itemView.findViewById(R.id.imageView8);
-            dcardPhoto = itemView.findViewById(R.id.imageView7);
+            cpuPhoto = itemView.findViewById(R.id.cpuView);
+            dcardPhoto = itemView.findViewById(R.id.dcardView);
+            motherboardPhoto = itemView.findViewById(R.id.motherboardView);
+            psuPhoto = itemView.findViewById(R.id.psuView);
+            ramPhoto = itemView.findViewById(R.id.ramView);
+            storagePhoto = itemView.findViewById(R.id.storageView);
+            casingPhoto = itemView.findViewById(R.id.casingView);
+            coolerPhoto = itemView.findViewById(R.id.coolerView);
         }
     }
 }

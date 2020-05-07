@@ -27,10 +27,10 @@ public interface SchemeDao {
     LiveData<List<SchemeWithParts>> getSchemesAndParts();
 
     @Transaction
-    @Query("SELECT * FROM Part WHERE category = :category")
+    @Query("SELECT * FROM Part WHERE category = :category ORDER BY commentNumber DESC")
     LiveData<List<Part>> getPartsByCategory(String category);
 
-    @Query("SELECT * FROM Part WHERE category = :category AND title LIKE :pattern")
+    @Query("SELECT * FROM Part WHERE category = :category AND title LIKE :pattern ORDER BY commentNumber DESC")
     LiveData<List<Part>> findPartsWithPatternAndCategory(String pattern, String category);
 
     @Insert
