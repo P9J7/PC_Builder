@@ -31,6 +31,8 @@ import com.p9j7.pcbuilder.Model.SchemeWithParts;
 import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Util.CopyDialogFragment;
 import com.p9j7.pcbuilder.Util.DeleteDialogFragment;
+import com.p9j7.pcbuilder.Util.ScreenShootHelper;
+import com.p9j7.pcbuilder.Util.Snapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +162,8 @@ public class DisplayFragment extends Fragment {
             case R.id.picShare:
                 //todo 截长图、打开系统分享。
 //                ShareUtil.shotScreen(getActivity());
+                Snapshot snapshot = new Snapshot(getView());
+                ScreenShootHelper.addPictureToAlbum(getContext(), snapshot.apply(), String.valueOf(System.currentTimeMillis()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

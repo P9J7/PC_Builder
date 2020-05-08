@@ -18,12 +18,16 @@ import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Util.LoadImage;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayViewHolder> {
     private SchemeViewModel schemeViewModel;
     private Context context;
     private List<Part> parts;
+    private Map<String, Integer> cateToInt;
 
     private SchemeAdapter.OnItemClickListener mOnItemClickListener;
 
@@ -51,6 +55,15 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         });
         this.schemeViewModel = schemeViewModel;
         this.context = context;
+        this.cateToInt = new HashMap<>();
+        cateToInt.put("cpu", 0);
+        cateToInt.put("motherboard", 1);
+        cateToInt.put("dcard", 2);
+        cateToInt.put("ram", 3);
+        cateToInt.put("storage", 4);
+        cateToInt.put("psu", 5);
+        cateToInt.put("casing", 6);
+        cateToInt.put("cooler", 7);
     }
 
     @NonNull
@@ -84,6 +97,7 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
     }
 
     public void setParts(List<Part> parts) {
+        Collections.sort(parts, (a, b) -> cateToInt.get(a.getCategory()).compareTo(cateToInt.get(b.getCategory())));
         this.parts = parts;
         notifyDataSetChanged();
     }

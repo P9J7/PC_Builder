@@ -31,6 +31,7 @@ public class IndexFragment extends Fragment {
     private SchemeAdapter schemeAdapter;
     private SchemeViewModel schemeViewModel;
     private List<SchemeWithParts> schemeWithPartsList;
+    private boolean isFirstLoading;
 
     @Override
     public View onCreateView(
@@ -38,6 +39,7 @@ public class IndexFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
+        isFirstLoading = true;
         return inflater.inflate(R.layout.fragment_index, container, false);
     }
 
@@ -69,6 +71,8 @@ public class IndexFragment extends Fragment {
         schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
         schemeViewModel.getSchemesAndParts().observe(getViewLifecycleOwner(), schemeWithParts -> {
             Log.e(TAG, "onActivityCreated: 进入了一次");
+            //这个不clear就会导致数据被重复加载
+            schemeWithPartsList.clear();
             schemeWithParts.forEach(item -> schemeWithPartsList.add(item));
             schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
         });

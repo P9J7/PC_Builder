@@ -91,8 +91,8 @@
 
         <ImageView
             android:id="@+id/partPic"
-            android:layout_width="139dp"
-            android:layout_height="0dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
