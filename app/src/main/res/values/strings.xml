@@ -41,9 +41,12 @@
     <string name="pick_cooler">PICK COOLER</string>
     <string name="no_data">No data to save</string>
     <string name="tosave">Save Build?</string>
+    <string name="tocopy">Copy Build?</string>
     <string name="save">Save</string>
     <string name="cancel">No</string>
     <string name="back">Cancel</string>
     <string name="build_name">Build Name</string>
     <string name="deltip">Delete Build</string>
+    <string name="havacopyed">Please paste to share</string>
+    <string name="PCBuilderShare">PC Builder Share</string>
 </resources>

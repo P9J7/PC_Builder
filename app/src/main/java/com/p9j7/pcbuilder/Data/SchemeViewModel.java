@@ -31,6 +31,7 @@ public class SchemeViewModel extends AndroidViewModel {
     private final Map<Integer, String> intToCategory;
     private Integer quickVisible;
     private Context context;
+    private Boolean isEdit;
 
     public SchemeViewModel(@NonNull Application application) {
         super(application);
@@ -52,6 +53,15 @@ public class SchemeViewModel extends AndroidViewModel {
         intToCategory.put(6, "casing");
         intToCategory.put(7, "cooler");
         this.quickVisible = View.GONE;
+        this.isEdit = false;
+    }
+
+    public Boolean getEdit() {
+        return isEdit;
+    }
+
+    public void setEdit(Boolean edit) {
+        isEdit = edit;
     }
 
     public void setMixList(List<Object> mixList) {
@@ -103,17 +113,8 @@ public class SchemeViewModel extends AndroidViewModel {
         return selected;
     }
 
-    public LiveData<List<Scheme>> getAllScheme() {
-        return schemeRepo.getAllScheme();
-    }
-
     public LiveData<List<SchemeWithParts>> getSchemesAndParts() {
         return schemeRepo.getSchemesAndParts();
-    }
-
-
-    public void insertSchemes(Scheme scheme) {
-        schemeRepo.insertSchemes(scheme);
     }
 
     public void setPickTitle(String pickTitle) {
@@ -146,5 +147,9 @@ public class SchemeViewModel extends AndroidViewModel {
 
     public void delete(Scheme scheme, List<Part> parts) {
         schemeRepo.delete(scheme, parts);
+    }
+
+    public void updateSchemeBySchemeId(int schemeId, String schemeName, String schemeDetail, double totalPrice, List<Part> toSaveParts, List<Part> toDeleteParts) {
+        schemeRepo.updateSchemeBySchemeId(new Scheme(schemeId, schemeName, totalPrice, schemeDetail), toSaveParts, toDeleteParts);
     }
 }

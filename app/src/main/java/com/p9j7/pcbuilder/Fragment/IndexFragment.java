@@ -1,12 +1,15 @@
 package com.p9j7.pcbuilder.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -20,6 +23,8 @@ import com.p9j7.pcbuilder.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class IndexFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -40,6 +45,9 @@ public class IndexFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.fab).setVisibility(View.VISIBLE);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle("PC Builder");
     }
 
     @Override
@@ -59,6 +67,11 @@ public class IndexFragment extends Fragment {
         schemeAdapter = new SchemeAdapter(schemeViewModel, getContext());
         schemeWithPartsList = new ArrayList<>();
         schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
+        schemeViewModel.getSchemesAndParts().observe(getViewLifecycleOwner(), schemeWithParts -> {
+            Log.e(TAG, "onActivityCreated: 进入了一次");
+            schemeWithParts.forEach(item -> schemeWithPartsList.add(item));
+            schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
+        });
         // todo 并没有搞明白下面这么做为什么能把 Fragment对象传过去
         schemeAdapter.setOnItemClickListener(new SchemeAdapter.OnItemClickListener() {
             @Override
@@ -69,12 +82,6 @@ public class IndexFragment extends Fragment {
             }
         });
         //todo 接下来要怎么做？
-        schemeViewModel.getSchemesAndParts().observe(getViewLifecycleOwner(), schemeWithParts -> {
-//            Log.e(TAG, "onActivityCreated: 创建成功");
-            //todo 图片顺序显示怎么实现？
-            schemeWithParts.forEach(item -> schemeWithPartsList.add(item));
-            schemeAdapter.setSchemeWithPartsList(schemeWithPartsList);
-        });
         recyclerView.setAdapter(schemeAdapter);
     }
 }

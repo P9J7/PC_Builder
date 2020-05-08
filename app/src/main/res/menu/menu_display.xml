@@ -7,10 +7,10 @@
         app:showAsAction="always">
         <menu>
             <item
-                android:id="@+id/text"
+                android:id="@+id/textShare"
                 android:title="@string/copy_as_text" />
             <item
-                android:id="@+id/pic"
+                android:id="@+id/picShare"
                 android:title="@string/save_to_pic" />
         </menu>
     </item>

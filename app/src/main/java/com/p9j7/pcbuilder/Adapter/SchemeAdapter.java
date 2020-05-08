@@ -87,20 +87,28 @@ public class SchemeAdapter extends ListAdapter<SchemeWithParts, SchemeAdapter.Sc
             partList.forEach(item -> {
                 if (item.getCategory().equals("cpu")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.cpuPhoto);
+                    holder.cpuPhoto.setVisibility(View.VISIBLE);
                 } else if (item.getCategory().equals("dcard")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.dcardPhoto);
+                    holder.dcardPhoto.setVisibility(View.VISIBLE);
                 } else if (item.getCategory().equals("motherboard")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.motherboardPhoto);
+                    holder.motherboardPhoto.setVisibility(View.VISIBLE);
                 } else if (item.getCategory().equals("ram")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.ramPhoto);
+                    holder.ramPhoto.setVisibility(View.VISIBLE);
                 } else if (item.getCategory().equals("storage")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.storagePhoto);
+                    holder.storagePhoto.setVisibility(View.VISIBLE);
                 } else if (item.getCategory().equals("psu")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.psuPhoto);
+                    holder.psuPhoto.setVisibility(View.VISIBLE);
                 } else if (item.getCategory().equals("casing")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.casingPhoto);
+                    holder.casingPhoto.setVisibility(View.VISIBLE);
                 } else if (item.getCategory().equals("cooler")) {
                     LoadImage.glideClrcle(context, item.getImgPath(), holder.coolerPhoto);
+                    holder.coolerPhoto.setVisibility(View.VISIBLE);
                 }
             });
         }

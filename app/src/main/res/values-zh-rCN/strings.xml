@@ -41,4 +41,6 @@
     <string name="build_name">配置名称</string>
     <string name="deltip">确认要删除配置吗？</string>
     <string name="back">取消</string>
+    <string name="tocopy">复制配置？</string>
+    <string name="havacopyed">已复制至剪贴板</string>
 </resources>

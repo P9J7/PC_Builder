@@ -59,14 +59,6 @@ public class BuildFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        getActivity().findViewById(R.id.toolbar).setVisibility(VISIBLE);
-        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(R.string.new_build);
-        //todo 后期用得上
-//        Drawable blue = getResources().getDrawable(android.R.color.holo_blue_dark);
-//        actionBar.setBackgroundDrawable(blue);
         getActivity().findViewById(R.id.fab).setVisibility(View.GONE);
         return inflater.inflate(R.layout.fragment_build, container, false);
     }
@@ -83,10 +75,17 @@ public class BuildFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         schemeViewModel = new ViewModelProvider(getActivity()).get(SchemeViewModel.class);
+
+        getActivity().findViewById(R.id.toolbar).setVisibility(VISIBLE);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (!schemeViewModel.getEdit()) {
+            actionBar.setTitle(R.string.new_build);
+        } else {
+            actionBar.setTitle(R.string.edit);
+        }
+
         builderAdapter = new BuilderAdapter(schemeViewModel, getContext());
-//        unsureList = schemeViewModel.getMixList().getValue();
-//        Log.e(TAG, "onActivityCreated: " + unsureList.toString());
-//        builderAdapter.setUnsureList(unsureList);
         builderAdapter.setOnItemClickListener(new SchemeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick() {
@@ -118,15 +117,6 @@ public class BuildFragment extends Fragment {
         recyclerView.setAdapter(builderAdapter);
     }
 
-//    @Override
-//    public void onStop() {
-        //todo 后期用得上
-//        super.onStop();
-//        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-//        Drawable white = getResources().getDrawable(R.color.titlecolor);
-//        actionBar.setBackgroundDrawable(white);
-//    }
-
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         menu.clear();
@@ -143,12 +133,18 @@ public class BuildFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     if (toSaveParts.size() == 0) {
-                        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-                        actionBar.setDisplayHomeAsUpEnabled(false);
-                        actionBar.setTitle("PC Builder");
+                        schemeViewModel.setEdit(false);
                         NavHostFragment.findNavController(BuildFragment.this).navigateUp();
                         return true;
+                    } else if (schemeViewModel.getEdit() && (schemeViewModel.getSelected().getValue().getParts().stream().mapToLong(Part::getPartId).sum()
+                            == schemeViewModel.getMixList().getValue().stream().filter(item -> item instanceof Part).mapToLong(item -> ((Part) item).getPartId()).sum())) {
+                        // 是编辑模式且配件的id相加和一致即表示没有改变配置
+                        schemeViewModel.setEdit(false);
+                        NavHostFragment.findNavController(BuildFragment.this).navigateUp();
+                        schemeViewModel.setMixList(schemeViewModel.getDefaultPickTexts());
+                        return true;
                     } else {
+                        // 进入这个循环，说明配置单改变了或者是正在新建配置，这样在对话框Fragment里面判断是哪一种状态
                         SaveDialogFragment saveDialogFragment = new SaveDialogFragment(schemeViewModel, toSaveParts, totalNumberLive.get());
                         saveDialogFragment.show(getActivity().getSupportFragmentManager(), null);
                         return true;
@@ -164,28 +160,39 @@ public class BuildFragment extends Fragment {
         switch (item.getItemId()) {
             case android.R.id.home:
                 if (toSaveParts.size() == 0) {
-                    ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-                    actionBar.setTitle("PC Builder");
-//                NavHostFragment.findNavController(BuildFragment.this).popBackStack();
-//                NavHostFragment.findNavController(BuildFragment.this).popBackStack();
-//                NavHostFragment.findNavController(BuildFragment.this).popBackStack();
+                    schemeViewModel.setEdit(false);
                     NavHostFragment.findNavController(BuildFragment.this).navigateUp();
+                    return true;
+                } else if (schemeViewModel.getEdit() && (schemeViewModel.getSelected().getValue().getParts().stream().mapToLong(Part::getPartId).sum()
+                        == schemeViewModel.getMixList().getValue().stream().filter(item1 -> item1 instanceof Part).mapToLong(item1 -> ((Part) item1).getPartId()).sum())) {
+                    // 是编辑模式且配件的id相加和一致即表示没有改变配置
+                    schemeViewModel.setEdit(false);
+                    NavHostFragment.findNavController(BuildFragment.this).navigateUp();
+                    schemeViewModel.setMixList(schemeViewModel.getDefaultPickTexts());
+                    return true;
+                } else {
+                    // 进入这个循环，说明配置单改变了或者是正在新建配置，这样在对话框Fragment里面判断是哪一种状态
+                    SaveDialogFragment saveDialogFragment = new SaveDialogFragment(schemeViewModel, toSaveParts, totalNumberLive.get());
+                    saveDialogFragment.show(getActivity().getSupportFragmentManager(), null);
                     return true;
                 }
             case R.id.saveSchemeBtn:
                 if (toSaveParts.size() == 0) {
                     Toast.makeText(getActivity(), R.string.no_data, Toast.LENGTH_SHORT).show();
+                    return true;
+//                } else if (schemeViewModel.getEdit() && (schemeViewModel.getSelected().getValue().getParts().stream().mapToLong(Part::getPartId).sum()
+//                        == schemeViewModel.getMixList().getValue().stream().filter(item1 -> item1 instanceof Part).mapToLong(item1 -> ((Part) item1).getPartId()).sum())) {
+//                    // 是编辑模式且配件的id相加和一致即表示没有改变配置
+//                    schemeViewModel.setEdit(false);
+//                    NavHostFragment.findNavController(BuildFragment.this).navigateUp();
+//                    schemeViewModel.setMixList(schemeViewModel.getDefaultPickTexts());
+//                    return true;
                 } else {
-                    // 这里其实可以优化，把详情在上面的遍历中也传过来，这样在对话框中就不要遍历了
+                    // 进入这个循环，说明配置单改变了或者是正在新建配置，这样在对话框Fragment里面判断是哪一种状态
                     SaveDialogFragment saveDialogFragment = new SaveDialogFragment(schemeViewModel, toSaveParts, totalNumberLive.get());
                     saveDialogFragment.show(getActivity().getSupportFragmentManager(), null);
-                    ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-                    actionBar.setTitle("PC Builder");
                     return true;
                 }
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

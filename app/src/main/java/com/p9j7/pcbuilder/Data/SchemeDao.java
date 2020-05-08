@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.p9j7.pcbuilder.Model.Part;
 import com.p9j7.pcbuilder.Model.Scheme;
@@ -16,9 +17,6 @@ import java.util.List;
 
 @Dao
 public interface SchemeDao {
-    @Query("SELECT * FROM Scheme ORDER BY schemeId DESC")
-    LiveData<List<Scheme>> getAllScheme();
-
     @Insert
     List<Long> insertSchemes(Scheme... schemes);
 
@@ -41,4 +39,7 @@ public interface SchemeDao {
 
     @Delete
     void deleteCrossRef(SchemePartCrossRef... crossRefs);
+
+    @Update
+    void updateScheme(Scheme... schemes);
 }

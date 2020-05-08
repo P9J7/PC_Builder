@@ -26,6 +26,15 @@ public class Scheme {
         this.detail = detail;
     }
 
+    @Ignore
+    public Scheme(int schemeId, String name, double price, String detail) {
+        this.schemeId = schemeId;
+        this.name = name;
+        this.price = price;
+        this.detail = detail;
+    }
+
+
     public int getSchemeId() {
         return schemeId;
     }

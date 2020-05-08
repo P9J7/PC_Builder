@@ -1,5 +1,8 @@
 package com.p9j7.pcbuilder.Fragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,18 +27,21 @@ import com.p9j7.pcbuilder.Adapter.DisplayAdapter;
 import com.p9j7.pcbuilder.Adapter.SchemeAdapter;
 import com.p9j7.pcbuilder.Data.SchemeViewModel;
 import com.p9j7.pcbuilder.Model.Part;
+import com.p9j7.pcbuilder.Model.SchemeWithParts;
 import com.p9j7.pcbuilder.R;
+import com.p9j7.pcbuilder.Util.CopyDialogFragment;
 import com.p9j7.pcbuilder.Util.DeleteDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayFragment extends Fragment{
+public class DisplayFragment extends Fragment {
     private RecyclerView recyclerView;
     private SchemeViewModel schemeViewModel;
     private DisplayAdapter displayAdapter;
     private List<Part> partList;
     private Bundle toolbarType;
+
 
     public DisplayFragment() {
         // Required empty public constructor
@@ -52,7 +59,7 @@ public class DisplayFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
         getActivity().findViewById(R.id.fab).setVisibility(View.GONE);
@@ -98,7 +105,7 @@ public class DisplayFragment extends Fragment{
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setTitle("PC Builder");
                 NavHostFragment.findNavController(DisplayFragment.this).navigateUp();
@@ -106,9 +113,53 @@ public class DisplayFragment extends Fragment{
             case R.id.delete:
                 DeleteDialogFragment deleteDialogFragment = new DeleteDialogFragment(schemeViewModel);
                 deleteDialogFragment.show(getActivity().getSupportFragmentManager(), null);
-                ActionBar actionBar1 = ((AppCompatActivity) getActivity()).getSupportActionBar();
-                actionBar1.setDisplayHomeAsUpEnabled(false);
-                actionBar1.setTitle("PC Builder");
+                return true;
+            case R.id.edit:
+                schemeViewModel.getSelected().getValue().getParts().forEach(part -> {
+                    if (part.getCategory().equals("cpu")) {
+                        schemeViewModel.setMixListByIndex(0, part);
+                    } else if (part.getCategory().equals("motherboard")) {
+                        schemeViewModel.setMixListByIndex(1, part);
+                    } else if (part.getCategory().equals("dcard")) {
+                        schemeViewModel.setMixListByIndex(2, part);
+                    } else if (part.getCategory().equals("ram")) {
+                        schemeViewModel.setMixListByIndex(3, part);
+                    } else if (part.getCategory().equals("storage")) {
+                        schemeViewModel.setMixListByIndex(4, part);
+                    } else if (part.getCategory().equals("psu")) {
+                        schemeViewModel.setMixListByIndex(5, part);
+                    } else if (part.getCategory().equals("casing")) {
+                        schemeViewModel.setMixListByIndex(6, part);
+                    } else if (part.getCategory().equals("cooler")) {
+                        schemeViewModel.setMixListByIndex(7, part);
+                    }
+                });
+                schemeViewModel.setEdit(true);
+                NavHostFragment.findNavController(DisplayFragment.this).navigate(R.id.action_displayFragment_to_buildFragment);
+                return true;
+            case R.id.copy:
+                CopyDialogFragment copyDialogFragment = new CopyDialogFragment(schemeViewModel);
+                copyDialogFragment.show(getActivity().getSupportFragmentManager(), null);
+                return true;
+            case R.id.textShare:
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                StringBuilder textShare = new StringBuilder();
+                SchemeWithParts schemeWithParts = schemeViewModel.getSelected().getValue();
+                textShare.append(schemeWithParts.getScheme().getName() + "\n");
+                textShare.append(getResources().getString(R.string.total) + "：￥" + schemeWithParts.getScheme().getPrice() + "\n\n");
+                List<Part> parts = schemeWithParts.getParts();
+                parts.forEach(p -> {
+                    textShare.append(p.getTitle() + "\n");
+                    textShare.append("￥" + p.getPrice() + "\n\n");
+                });
+                textShare.append("该配置单由PC Builder应用分享");
+                ClipData clipData = ClipData.newPlainText(null, textShare);
+                clipboard.setPrimaryClip(clipData);
+                Toast.makeText(getActivity(), R.string.havacopyed, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.picShare:
+                //todo 截长图、打开系统分享。
+//                ShareUtil.shotScreen(getActivity());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

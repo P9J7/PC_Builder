@@ -104,7 +104,7 @@ public class PartFragment extends Fragment {
         addLine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo 问题出在这里
+                // todo 问题出在这里,因为子类转父类的问题？
                 schemeViewModel.setMixListByIndex(schemeViewModel.getAdapterPosition(), schemeViewModel.getPartSelected().getValue());
                 // popBackStack跳过一个返回栈，直接跳到BuildFragment
 //                NavHostFragment.findNavController(PartFragment.this).popBackStack();

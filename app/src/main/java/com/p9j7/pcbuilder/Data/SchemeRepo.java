@@ -15,26 +15,16 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 class SchemeRepo {
-    private LiveData<List<Scheme>> allScheme;
     private SchemeDao schemeDao;
 
     public SchemeRepo(Context context) {
         PCBuilderDatabase schemeDatabase = PCBuilderDatabase.getDatabase(context.getApplicationContext());
         schemeDao = schemeDatabase.getSchemeDao();
-        allScheme = schemeDao.getAllScheme();
-    }
-
-    public LiveData<List<Scheme>> getAllScheme() {
-        return allScheme;
     }
 
 
     public LiveData<List<SchemeWithParts>> getSchemesAndParts() {
         return schemeDao.getSchemesAndParts();
-    }
-
-    public void insertSchemes(Scheme... schemes) {
-        new InsertAsyncTask(schemeDao).execute(schemes);
     }
 
     public LiveData<List<Part>> getPartsByCategory(String category) throws ExecutionException, InterruptedException {
@@ -61,6 +51,32 @@ class SchemeRepo {
         parts.forEach(part -> {
             new CrossrefDeleteAsyncTask(schemeDao).execute(new SchemePartCrossRef(scheme.getSchemeId(), part.getPartId()));
         });
+    }
+
+    @Transaction
+    public void updateSchemeBySchemeId(Scheme scheme, List<Part> toSaveParts, List<Part> toDeleteParts) {
+        new SchemeUpdateAsyncTask(schemeDao).execute(scheme);
+        toDeleteParts.forEach(part -> {
+            new CrossrefDeleteAsyncTask(schemeDao).execute(new SchemePartCrossRef(scheme.getSchemeId(), part.getPartId()));
+        });
+        toSaveParts.forEach(part -> {
+            new CrossRefInsertAsyncTask(schemeDao).execute(new SchemePartCrossRef(scheme.getSchemeId(), part.getPartId()));
+        });
+    }
+
+    static class SchemeUpdateAsyncTask extends AsyncTask<Scheme, Void, Void> {
+        private SchemeDao schemeDao;
+
+        SchemeUpdateAsyncTask(SchemeDao schemeDao) {
+            this.schemeDao = schemeDao;
+        }
+
+        @Override
+        protected Void doInBackground(Scheme... schemes) {
+            schemeDao.updateScheme(schemes);
+            return null;
+        }
+
     }
 
     static class CrossRefInsertAsyncTask extends AsyncTask<SchemePartCrossRef, Void, Void> {
