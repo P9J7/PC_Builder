@@ -30,7 +30,7 @@ public class CopyDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_save, null);
         editText = view.findViewById(R.id.buildName);
-        editText.setText(schemeViewModel.getSelected().getValue().getScheme().getName() + " COPY");
+        editText.setText(schemeViewModel.getSelected().getValue().getScheme().getName() + " " + getString(R.string.copy));
         builder.setTitle(R.string.tocopy)
                 .setView(view)
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {

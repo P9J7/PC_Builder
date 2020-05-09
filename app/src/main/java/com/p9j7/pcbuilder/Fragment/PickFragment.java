@@ -136,6 +136,8 @@ public class PickFragment extends Fragment {
             case android.R.id.home:
                 NavHostFragment.findNavController(PickFragment.this).navigateUp();
                 return true;
+            case R.id.filter:
+
             default:
                 return super.onOptionsItemSelected(item);
         }
