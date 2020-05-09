@@ -49,4 +49,5 @@
     <string name="deltip">Delete Build</string>
     <string name="havacopyed">Please paste to share</string>
     <string name="PCBuilderShare">PC Builder Share</string>
+    <string name="havesaved">image saved in picture</string>
 </resources>

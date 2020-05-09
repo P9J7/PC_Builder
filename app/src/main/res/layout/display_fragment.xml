@@ -8,6 +8,37 @@
     android:background="@android:color/background_light"
     tools:context=".Fragment.DisplayFragment">
 
+    <LinearLayout
+        android:id="@+id/namaAndPriceLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/schemeName"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/titlecolor"
+            android:gravity="center"
+            android:text="Intel游戏平台"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/schemePrice"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/titlecolor"
+            android:gravity="center"
+            android:text="￥3699.0"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="17sp" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerDisplay"
         android:layout_width="0dp"
@@ -19,35 +50,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schemePrice" />
-
-    <TextView
-        android:id="@+id/schemeName"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/titlecolor"
-        android:gravity="center"
-        android:text="Intel游戏平台"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/schemePrice"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/titlecolor"
-        android:gravity="center"
-        android:text="￥3699.0"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schemeName" />
+        app:layout_constraintTop_toBottomOf="@+id/namaAndPriceLine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

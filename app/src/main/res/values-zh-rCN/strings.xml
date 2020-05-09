@@ -43,4 +43,6 @@
     <string name="back">取消</string>
     <string name="tocopy">复制配置？</string>
     <string name="havacopyed">已复制至剪贴板</string>
+    <string name="havesaved">图片已保存至相册</string>
+    <string name="PCBuilderShare">该配置单由PC Builder应用分享</string>
 </resources>

@@ -3,6 +3,8 @@ package com.p9j7.pcbuilder.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +35,6 @@ import com.p9j7.pcbuilder.R;
 import com.p9j7.pcbuilder.Util.CopyDialogFragment;
 import com.p9j7.pcbuilder.Util.DeleteDialogFragment;
 import com.p9j7.pcbuilder.Util.ScreenShootHelper;
-import com.p9j7.pcbuilder.Util.Snapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +156,7 @@ public class DisplayFragment extends Fragment {
                     textShare.append(p.getTitle() + "\n");
                     textShare.append("￥" + p.getPrice() + "\n\n");
                 });
-                textShare.append("该配置单由PC Builder应用分享");
+                textShare.append(getResources().getString(R.string.PCBuilderShare));
                 ClipData clipData = ClipData.newPlainText(null, textShare);
                 clipboard.setPrimaryClip(clipData);
                 Toast.makeText(getActivity(), R.string.havacopyed, Toast.LENGTH_SHORT).show();
@@ -162,8 +164,12 @@ public class DisplayFragment extends Fragment {
             case R.id.picShare:
                 //todo 截长图、打开系统分享。
 //                ShareUtil.shotScreen(getActivity());
-                Snapshot snapshot = new Snapshot(getView());
-                ScreenShootHelper.addPictureToAlbum(getContext(), snapshot.apply(), String.valueOf(System.currentTimeMillis()));
+                LinearLayout nameAndPriceLine = getActivity().findViewById(R.id.namaAndPriceLine);
+                Bitmap target = Bitmap.createBitmap(nameAndPriceLine.getWidth(), nameAndPriceLine.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(target);
+                nameAndPriceLine.draw(canvas);
+                ScreenShootHelper.addPictureToAlbum(getContext(), ScreenShootHelper.getScreenshotFromRecyclerView(recyclerView, target), String.valueOf(System.currentTimeMillis()));
+                Toast.makeText(getActivity(), R.string.havesaved, Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
