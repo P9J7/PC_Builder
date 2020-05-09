@@ -64,6 +64,9 @@ public class DisplayAdapter extends ListAdapter<Part, DisplayAdapter.DisplayView
         cateToInt.put("psu", 5);
         cateToInt.put("casing", 6);
         cateToInt.put("cooler", 7);
+        cateToInt.put("display", 8);
+        cateToInt.put("keyboard", 9);
+        cateToInt.put("mouse", 10);
     }
 
     @NonNull

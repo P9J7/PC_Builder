@@ -45,4 +45,7 @@
     <string name="havacopyed">已复制至剪贴板</string>
     <string name="havesaved">图片已保存至相册</string>
     <string name="PCBuilderShare">该配置单由PC Builder应用分享</string>
+    <string name="pick_display">挑选显示器</string>
+    <string name="pick_keyboard">挑选键盘</string>
+    <string name="pick_mouse">挑选鼠标</string>
 </resources>

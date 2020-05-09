@@ -50,4 +50,7 @@
     <string name="havacopyed">Please paste to share</string>
     <string name="PCBuilderShare">PC Builder Share</string>
     <string name="havesaved">image saved in picture</string>
+    <string name="pick_display">PICK DISPLAY</string>
+    <string name="pick_keyboard">PICK KEYBOARD</string>
+    <string name="pick_mouse">PICK MOUSE</string>
 </resources>

@@ -38,7 +38,8 @@ public class SchemeViewModel extends AndroidViewModel {
         schemeRepo = new SchemeRepo(application);
         context = application.getApplicationContext();
         this.mixList = new MutableLiveData<>(Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
-                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler)));
+                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler),
+                context.getString(R.string.pick_display), context.getString(R.string.pick_keyboard), context.getString(R.string.pick_mouse)));
         // 这里必须new，否则引用的是同一个地址
 //        this.defaultPickTexts = Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
 //                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler));
@@ -52,6 +53,9 @@ public class SchemeViewModel extends AndroidViewModel {
         intToCategory.put(5, "psu");
         intToCategory.put(6, "casing");
         intToCategory.put(7, "cooler");
+        intToCategory.put(8, "display");
+        intToCategory.put(9, "keyboard");
+        intToCategory.put(10, "mouse");
         this.quickVisible = View.GONE;
         this.isEdit = false;
     }
@@ -82,7 +86,8 @@ public class SchemeViewModel extends AndroidViewModel {
 
     public List<Object> getDefaultPickTexts() {
         return Arrays.asList(context.getString(R.string.pick_processor), context.getString(R.string.pick_motherboard), context.getString(R.string.pick_gpu),
-                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler));
+                context.getString(R.string.pick_mem), context.getString(R.string.pick_storage), context.getString(R.string.pick_psu), context.getString(R.string.pick_casing), context.getString(R.string.pick_cooler),
+                context.getString(R.string.pick_display), context.getString(R.string.pick_keyboard), context.getString(R.string.pick_mouse));
 //        return defaultPickTexts;
     }
 
