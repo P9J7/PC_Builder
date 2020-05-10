@@ -136,7 +136,14 @@ public class DisplayFragment extends Fragment {
                         schemeViewModel.setMixListByIndex(6, part);
                     } else if (part.getCategory().equals("cooler")) {
                         schemeViewModel.setMixListByIndex(7, part);
+                    } else if (part.getCategory().equals("display")) {
+                        schemeViewModel.setMixListByIndex(8, part);
+                    } else if (part.getCategory().equals("keyboard")) {
+                        schemeViewModel.setMixListByIndex(9, part);
+                    } else if (part.getCategory().equals("mouse")) {
+                        schemeViewModel.setMixListByIndex(10, part);
                     }
+
                 });
                 schemeViewModel.setEdit(true);
                 NavHostFragment.findNavController(DisplayFragment.this).navigate(R.id.action_displayFragment_to_buildFragment);
