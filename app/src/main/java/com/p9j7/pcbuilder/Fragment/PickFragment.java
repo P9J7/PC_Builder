@@ -101,7 +101,7 @@ public class PickFragment extends Fragment {
         menu.clear();
         inflater.inflate(R.menu.menu_pick, menu);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setMaxWidth(650);
+        searchView.setMaxWidth(800);
         searchView.setQueryHint(getString(R.string.search_tooltip));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -111,6 +111,7 @@ public class PickFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
+
                 String pattern = s.trim();
                 partsQuery.removeObservers(getViewLifecycleOwner());
                 partsQuery = schemeViewModel.findPartsWithPatternAndCategory(pattern, schemeViewModel.getIntToCategory()
@@ -131,13 +132,14 @@ public class PickFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavHostFragment.findNavController(PickFragment.this).navigateUp();
                 return true;
-            case R.id.filter:
-
+//            case R.id.filter:
+//                FilterDialogFragment filterDialogFragment = new FilterDialogFragment();
+//                filterDialogFragment.show(getActivity().getSupportFragmentManager(), null);
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

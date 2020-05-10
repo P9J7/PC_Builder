@@ -12,5 +12,6 @@
         android:id="@+id/filter"
         android:icon="@drawable/ic_filter"
         android:title="Item"
+        android:visible="false"
         app:showAsAction="always" />
 </menu>
